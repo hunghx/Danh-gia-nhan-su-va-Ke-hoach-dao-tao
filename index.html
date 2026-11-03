@@ -1,0 +1,2092 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kế hoạch Đánh giá & Phát triển Nhân sự Đào tạo CNTT - Rikkei Education</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #1a1a1a;
+      color: #333333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow: hidden;
+      font-weight: 400;
+    }
+
+    #presentation-container {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .slide {
+      display: none;
+      width: 1280px;
+      height: 720px;
+      max-width: 100vw;
+      max-height: 56.25vw;
+      position: relative;
+      background: #FFFFFF;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      border-radius: 4px;
+    }
+
+    .slide.active {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Common header & footer elements */
+    .slide-top-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: #B71C1C;
+    }
+
+    .logo-container {
+      position: absolute;
+      top: 24px;
+      right: 40px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      z-index: 10;
+    }
+
+    .logo-text {
+      color: #B71C1C;
+      font-size: 20px;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+    }
+    .logo-sub {
+      font-size: 10px;
+      color: #757575;
+      line-height: 1;
+    }
+
+    .footer-bar {
+      position: absolute;
+      bottom: 14px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 11px;
+      color: #757575;
+      padding: 0 40px;
+    }
+
+    .slide-number-badge {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 44px;
+      height: 44px;
+      background: #B71C1C;
+      color: #FFFFFF;
+      clip-path: polygon(100% 0, 0 100%, 100% 100%);
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+      padding: 4px 8px;
+      font-size: 13px;
+    }
+
+    /* Red poly break slides */
+    .slide-break {
+      background: linear-gradient(135deg, #B71C1C 0%, #880E4F 60%, #4A0007 100%);
+      color: #FFFFFF;
+      justify-content: center;
+      align-items: center;
+      padding: 60px 80px;
+    }
+
+    .break-bg-pattern {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 45%;
+      opacity: 0.12;
+      background-image: radial-gradient(#FFFFFF 15%, transparent 16%), radial-gradient(#FFFFFF 15%, transparent 16%);
+      background-size: 30px 30px;
+      background-position: 0 0, 15px 15px;
+    }
+
+    .break-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      width: 100%;
+    }
+
+    .break-number-circle {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      color: #B71C1C;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 56px;
+      font-weight: 600;
+      flex-shrink: 0;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    }
+
+    .break-title {
+      font-size: 40px;
+      line-height: 1.25;
+      font-weight: 500;
+      color: #FFFFFF;
+      max-width: 800px;
+    }
+
+    /* Content slide layout */
+    .content-container {
+      padding: 30px 48px 45px 48px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-header {
+      margin-bottom: 14px;
+    }
+
+    .slide-title {
+      font-size: 24px;
+      color: #212121;
+      font-weight: 600;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .slide-title-num {
+      color: #B71C1C;
+    }
+
+    .slide-subtitle {
+      font-size: 13px;
+      color: #616161;
+      line-height: 1.4;
+    }
+
+    /* Cards and Grids */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      flex: 1;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 14px;
+      flex: 1;
+    }
+
+    .card {
+      background: #FAFAFA;
+      border: 1px solid #EEEEEE;
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-header {
+      padding: 9px 14px;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-header-red {
+      background: #B71C1C;
+    }
+
+    .card-header-slate {
+      background: #455A64;
+    }
+
+    .card-header-blue {
+      background: #1565C0;
+    }
+
+    .card-header-teal {
+      background: #00695C;
+    }
+
+    .card-body {
+      padding: 12px 14px;
+      font-size: 12px;
+      color: #37474F;
+      line-height: 1.5;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      overflow-y: auto;
+    }
+
+    .section-label {
+      font-size: 11.5px;
+      color: #B71C1C;
+      font-weight: 500;
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .bullet-list {
+      list-style-type: none;
+      padding-left: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .bullet-list li {
+      position: relative;
+      padding-left: 14px;
+      font-size: 11.5px;
+    }
+
+    .bullet-list li::before {
+      content: "•";
+      color: #B71C1C;
+      position: absolute;
+      left: 2px;
+      font-size: 14px;
+      line-height: 1;
+    }
+
+    /* Callout box at bottom */
+    .callout-box {
+      margin-top: 10px;
+      padding: 8px 14px;
+      background: #F5F7FA;
+      border-left: 4px solid #B71C1C;
+      border-radius: 4px;
+      font-size: 11.5px;
+      color: #37474F;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .callout-icon {
+      font-size: 14px;
+      color: #B71C1C;
+      flex-shrink: 0;
+    }
+
+    /* Table styles */
+    .custom-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11.5px;
+      margin-top: 4px;
+      background: #FFFFFF;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid #E0E0E0;
+    }
+
+    .custom-table th {
+      background: #ECEFF1;
+      color: #37474F;
+      padding: 8px 10px;
+      font-weight: 500;
+      text-align: left;
+      border-bottom: 2px solid #CFD8DC;
+    }
+
+    .custom-table td {
+      padding: 7px 10px;
+      border-bottom: 1px solid #EEEEEE;
+      color: #424242;
+      vertical-align: middle;
+    }
+
+    .custom-table tr:hover {
+      background: #FAFAFA;
+    }
+
+    /* Flowchart boxes (Part IV) */
+    .flowchart-container {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+      justify-content: center;
+    }
+
+    .flow-step {
+      display: flex;
+      border: 1px solid #E0E0E0;
+      border-radius: 6px;
+      overflow: hidden;
+      background: #FFFFFF;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    .flow-step-aside {
+      width: 230px;
+      background: #E8EAF6;
+      color: #283593;
+      padding: 8px 12px;
+      font-size: 11.5px;
+      font-weight: 500;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-right: 1px solid #C5CAE9;
+    }
+
+    .flow-step-aside.red-theme {
+      background: #FFEBEE;
+      color: #B71C1C;
+      border-right: 1px solid #FFCDD2;
+    }
+
+    .flow-step-main {
+      padding: 7px 14px;
+      flex: 1;
+      font-size: 11.5px;
+      color: #37474F;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 2px;
+    }
+
+    .flow-arrow {
+      text-align: center;
+      color: #9E9E9E;
+      font-size: 12px;
+      line-height: 1;
+      margin: -3px 0;
+    }
+
+    /* Navigation toolbar */
+    #nav-controls {
+      position: fixed;
+      bottom: 16px;
+      background: rgba(30, 30, 30, 0.9);
+      padding: 8px 18px;
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: #FFFFFF;
+      font-size: 13px;
+      z-index: 999;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
+
+    .nav-btn {
+      background: #424242;
+      border: none;
+      color: #FFFFFF;
+      padding: 6px 14px;
+      border-radius: 16px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: background 0.2s;
+    }
+
+    .nav-btn:hover {
+      background: #B71C1C;
+    }
+
+    select#slide-select {
+      background: #333333;
+      color: #FFFFFF;
+      border: 1px solid #555555;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      outline: none;
+      max-width: 260px;
+    }
+
+    /* Print styles for export */
+    @media print {
+      body {
+        background: transparent;
+        overflow: visible;
+      }
+      #presentation-container {
+        display: block;
+        width: auto;
+        height: auto;
+      }
+      .slide {
+        display: flex !important;
+        page-break-after: always;
+        width: 100vw;
+        height: 100vh;
+        max-width: none;
+        max-height: none;
+        box-shadow: none;
+        border-radius: 0;
+      }
+      #nav-controls {
+        display: none !important;
+      }
+    }
+  
+    /* STAIRCASE LADDER CSS */
+    .ladder-mgmt-box {
+      background: #f8fafc;
+      border: 1.5px solid #cbd5e1;
+      border-left: 5px solid #1e3a8a;
+      border-radius: 10px;
+      padding: 10px 18px;
+      max-width: 500px;
+      margin-bottom: 8px;
+    }
+    .ladder-mgmt-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: #1e3a8a;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .ladder-mgmt-list {
+      font-size: 13.5px;
+      color: #1e293b;
+      line-height: 1.5;
+    }
+    .ladder-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+      height: 430px;
+      position: relative;
+      margin-top: 5px;
+    }
+    .ladder-step-col {
+      flex: 1;
+      min-width: 0;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    .ladder-step-card {
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 14px 12px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+      height: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+    .ladder-rank-badge {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .ladder-plus-icon {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #eff6ff;
+      color: #2563eb;
+      font-size: 11px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .ladder-step-name {
+      font-size: 18px;
+      font-weight: 800;
+      color: #0f172a;
+      margin: 2px 0;
+      line-height: 1.2;
+    }
+    .ladder-step-sub {
+      font-size: 13px;
+      color: #475569;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .ladder-step-ftr {
+      padding-top: 10px;
+      border-top: 1.5px solid #f1f5f9;
+    }
+    .ladder-step-load {
+      font-size: 17px;
+      font-weight: 800;
+      color: #1e3a8a;
+      margin-bottom: 2px;
+    }
+    .ladder-step-desc {
+      font-size: 12px;
+      color: #64748b;
+      line-height: 1.35;
+    }
+  
+  </style>
+</head>
+<body>
+
+<div id="presentation-container">
+
+  <!-- SLIDE 1: BÌA CHÍNH -->
+  <div class="slide active" id="slide-1">
+    <div style="position: absolute; top:0; left:0; bottom:0; width: 35%; background: linear-gradient(135deg, #B71C1C 0%, #D32F2F 100%); clip-path: polygon(0 0, 100% 0, 60% 100%, 0 100%); z-index: 1;"></div>
+    <div style="position: absolute; top: 30px; right: 40px; z-index: 5;">
+      <div class="logo-text">RIKKEI EDUCATION</div>
+      <div class="logo-sub">where the dream begins</div>
+    </div>
+    
+    <div style="position: relative; z-index: 2; margin-left: 36%; height: 100%; display: flex; flex-direction: column; justify-content: center; padding-right: 60px;">
+      <div style="color: #B71C1C; font-size: 18px; font-weight: 500; margin-bottom: 12px; letter-spacing: 1px;">KẾ HOẠCH CHIẾN LƯỢC ĐÀO TẠO</div>
+      <h1 style="font-size: 38px; color: #1E1E1E; font-weight: 600; line-height: 1.25; margin-bottom: 16px;">
+        Đánh Giá Năng Lực &amp; Phát Triển Nhân Sự Đào Tạo CNTT
+      </h1>
+      <p style="font-size: 16px; color: #616161; line-height: 1.5; margin-bottom: 24px;">
+        Chuẩn hóa mô hình năng lực 6 cấp bậc, cân đối nguồn lực 13 lớp (440 sinh viên) và lộ trình phát triển nội bộ 6 - 12 tháng
+      </p>
+      <div style="font-size: 13px; color: #757575;">
+        <div>Đơn vị: Phòng Đào tạo CNTT — Rikkei Education</div>
+      </div>
+    </div>
+
+    <div class="footer-bar">© 2026 By Rikkei Education - Rikkei Education - All rights reserved.</div>
+  </div>
+
+  <!-- SLIDE 2: MỤC LỤC -->
+  <div class="slide" id="slide-2">
+    <div class="slide-top-bar"></div>
+    <div class="logo-container">
+      <div>
+        <div class="logo-text">RIKKEI EDUCATION</div>
+        <div class="logo-sub">where the dream begins</div>
+      </div>
+    </div>
+
+    <div style="display: flex; height: 100%; padding: 40px 48px 45px 0;">
+      <div style="width: 130px; background: #B71C1C; display: flex; align-items: center; justify-content: center; color: #FFFFFF; font-size: 32px; font-weight: 600; writing-mode: vertical-rl; transform: rotate(180deg); letter-spacing: 4px;">
+        NỘI DUNG
+      </div>
+      <div style="flex: 1; padding: 20px 48px; display: flex; flex-direction: column; justify-content: center; gap: 20px;">
+        <div style="display: flex; align-items: center; gap: 16px; font-size: 17px; color: #212121; padding: 10px 14px; background: #FAFAFA; border-radius: 6px; border-left: 4px solid #B71C1C;">
+          <span style="color: #B71C1C; font-size: 20px; font-weight: 600;">1.</span>
+          <span>Mô hình đào tạo CNTT (LMS - Trên lớp - Rèn luyện chuyên sâu)</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 16px; font-size: 17px; color: #212121; padding: 10px 14px; background: #FAFAFA; border-radius: 6px; border-left: 4px solid #B71C1C;">
+          <span style="color: #B71C1C; font-size: 20px; font-weight: 600;">2.</span>
+          <span>Tiêu chuẩn đánh giá nhân sự (Khung 6 cấp bậc &amp; Phân loại thực tế)</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 16px; font-size: 17px; color: #212121; padding: 10px 14px; background: #FAFAFA; border-radius: 6px; border-left: 4px solid #B71C1C;">
+          <span style="color: #B71C1C; font-size: 20px; font-weight: 600;">3.</span>
+          <span>Nhu cầu nhân sự &amp; Quyết định chiến lược (Quy mô 13 lớp - 440 sinh viên)</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 16px; font-size: 17px; color: #212121; padding: 10px 14px; background: #FAFAFA; border-radius: 6px; border-left: 4px solid #B71C1C;">
+          <span style="color: #B71C1C; font-size: 20px; font-weight: 600;">4.</span>
+          <span>Lộ trình phát triển nhân sự (4 lưu đồ chuyển giao giai đoạn chuẩn)</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 16px; font-size: 17px; color: #212121; padding: 10px 14px; background: #FAFAFA; border-radius: 6px; border-left: 4px solid #B71C1C;">
+          <span style="color: #B71C1C; font-size: 20px; font-weight: 600;">5.</span>
+          <span>Kế hoạch phát triển nội bộ trong 6 - 12 tháng &amp; Bảng phân công Mentor</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bar">© 2026 By Rikkei Education - Rikkei Education - All rights reserved.</div>
+  </div>
+
+  <!-- SLIDE 3: SECTION BREAK 1 -->
+  <div class="slide slide-break" id="slide-3">
+    <div class="break-bg-pattern"></div>
+    <div class="break-content">
+      <div class="break-number-circle">1</div>
+      <div class="break-title">Mô hình đào tạo CNTT</div>
+    </div>
+    <div class="footer-bar" style="color: rgba(255,255,255,0.7);">© 2026 By Rikkei Education - Rikkei Education - All rights reserved.</div>
+  </div>
+
+  <!-- SLIDE 4: CONTENT 1 - SƠ ĐỒ MÔ HÌNH ĐÀO TẠO -->
+  <div class="slide" id="slide-4">
+    <div class="slide-top-bar"></div>
+    <div class="logo-container">
+      <div>
+        <div class="logo-text">RIKKEI EDUCATION</div>
+        <div class="logo-sub">where the dream begins</div>
+      </div>
+    </div>
+
+    <div class="content-container">
+      <div class="slide-header">
+        <div class="slide-title">
+          <span class="slide-title-num">1.</span> Kiến trúc đào tạo CNTT &amp; Phân vai nhân sự
+        </div>
+        <div class="slide-subtitle">Sơ đồ tương tác giữa 3 trụ cột đào tạo và các cấp bậc nhân sự tham gia vận hành</div>
+      </div>
+
+      <div style="flex: 1; display: flex; align-items: center; justify-content: center; background: #FAFAFA; border: 1px solid #E0E0E0; border-radius: 8px; padding: 10px; overflow: hidden;">
+        <img src="diagram.png" onerror="this.onerror=null;this.src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA3EAAALmCAYAAADsYB0DAAAQAElEQVR4Aez9Cdwf093/j7+P6l0lJEJJQgi1lZb8CcVNGhVKBRGqomKP2mqLBrHUFjcqqP2mVIKKPRVbUZKIrWKNpZYmBJGoSFQs97++8rue5+NcmWuumc++f1555Fwzc5b3eZ/nnO09Z+Z8llikfyIgAiIgAiLQJAQuvfTSRdtuu+2i5ZdffpGZ+SPX+DdJEVUMERABERABEVi0RNsgp/8iUAQBJREBERCB+iFwzz332Pe//32bOnWqHX300fbmm29a2xjvj1zjTzjx6kdraSICIiACIiACxRFYorhkSiUCIiACRRJQMhEoM4Ebb7zR9t13X7v44ott/PjxtvPOO9sKK6zgc+HINf6EE4/4PlB/REAEREAERKBBCciIa9AbJ7VFQAREoNUIJJV3+vTpNmzYMGOFDWMtKU7wI5x4xCdd8NdRBERABERABBqNgIy4Rrtj0lcEREAERKCdwBlnnGFjxoyxLbfcst0v2wnxiE+6bPEU1lQEVBgREAERaDoCMuKa7paqQCIgAiLQGgRmzZpljzzyiB133HEFFZj4pCN9QQkVWQREoMUIqLgiUL8EZMTV772RZiIgAiIgAlkITJkyxbbffvssMdKDSEf69BgKEQEREAEREIEiCVQhmYy4KkBWFiIgAiIgAuUn8Pbbb9taa61VlGDSkb6oxEokAiIgAiIgAjUmICOuxjegQtlLrAiIgAiIgAiIgAiIgAiIQJMSkBHXpDdWxRKB4ggolQg0DoE+ffrYW2+9VZTCpCN9UYmVSAREQAREQARqTEBGXI1vgLIXAREQgaYgUINC9O/f3x588MGiciYd6YtKrEQiIAIiIAIiUGMCMuJqfAOUvQiIgAiIQHEEVlttNfvpT39qF154YUECiE860heUUJErQkBCRUAEREAECicgI65wZkohAiIgAiJQJwR+97vf2YgRI+yJJ57ISyPiEZ90eSVQJBEQgXolIL1EoKUJyIhr6duvwouACIhAYxP40Y9+ZDfccIMNGjTIJk6cmLUwhBOP+KTLGlmBIiACIiACTUqgOYolI6457qNKIQIiIAItS2CfffaxcePG2THHHGN77bWXN+bmzZvneXDEeMOfcOIR3wfqjwiIgAiIgAg0KAEZcTW4ccpSBERABESgvARYYfvnP/9pW221lf3hD3+wtdde25xz/sg1/oQTr7w5S5oIiIAIiIAIVJ+AjLjqM1eOIlAsAaUTARHIQeDII4+0hx9+2D7++GMfkyPX+HsP/REBERABERCBJiAgI64JbqKKIAIiIALZCShUBERABERABESgmQjIiGumu6myiIAIiIAIiEA5CUiWCIiACIhAXRKQEVeXt0VKiYAIiIAIiIAIiEDjEpDmIiAClSUgI66yfCVdBERABESgCAJ33HGH/fKXv7RtttnGb1DinCv4SLbOFZ7OOWcDBgzw+aMHcuREQAREQASqQkCZ5ElARlyeoBRNBERABESgsgQeffRRO+yww2yFFVawq666ygYOHGgTJkywRYsWFeXQtti0f/nLX3z+6IE+6IV+yJQTAREQAREQgVoTkBEXvwO6FgEREAERqBqBF1980U4++WT/UwDHH3+89enTx6ZNm2YPPfSQDR8+3Lp27Vo1XaIZkS/5owf6oBf68dMF6Ive0fg6FwEREAEREIFqEpARV03ayqupCahwIiAC+RF49913bcyYMbbZZpvZbrvtZl999ZWNHz/enn32WTvhhBNsjTXWyE9QlWKhD3qhH3qi7+DBg+3HP/6xLwflqZIqykYEREAEREAEPAEZcR6D/oiACIhAzQi0RMafffaZ/elPf7IddtjBfvSjH9k//vEPGz16tM2YMcPOO+8822STTRqCA3qi78yZM+3ss8/25fjhD39oO+64oy8f5WyIgkhJERABERCBhiYgI66hb5+UFwEREIH6JjBhwgTbe++9/WuR9957rx1wwAE2f/58u+aaa2y77barb+VzaIf+lGPBggW2//772z333GPdunWzX/3qV8Y3dTmSlyFYIkRABERABFqVgIy4Vr3zKrcIiIAIVIjAlClT7Mgjj7SVVlrJLrnkEuvfv7/NnTvXbr/9dr/jo3OuQjnXRqxzzpeLnSznzJljW221lf3hD3/w5YcDPGqjmXIVgRQC8hYBEWh4AjLiGv4WqgAiIAIiUHsCL7/8sp122mm23nrr2VFHHWW9evWyxx9/3B555BE79NBD/Y6Ttdey8hqEnSwpN+WHAzzgAh84VV4L5SACIiAClSEgqfVDQEZc/dwLaSICIiACDUVg9uzZdvHFF9uWW25pP//5z+3zzz+3cePG2QsvvGCjRo3yO042VIHKrCw7WcIBHnCBD5zgBTf4lTlLiRMBERABEWgRAg1mxLXIXVExRUAERKBOCXz55ZfeUBs0aJCts8469tJLL/kVuFmzZtkFF1zgd5ysU9VrqhY7ccIHTqzIwQ1+cMTAg2tNFVTmIiACIiACDUVARlxD3S4pWzQBJRQBESiJAJt27Lvvvn7jjjvvvNNvVsKGHtddd53fcbIk4S2WeIcddjC4wY9NX+DJhijwhXOL4VBxRUAEREAEiiAgI64IaEoiAiLQOgRauaRPPPGEHXPMMf77tvPPP9+vsrGSFHacXHLJJVsZT8llhx9GHDzhymodnPmODu7wLzkTCRABERABEWhKAjLimvK2qlAiIAIiUBwBfr/tzDPPNH777JBDDrHu3bv7zUnYYZGdFtlxsjjJLZeqoALDFb5wZlMUuMOf+8D94L4UJFCRRUAEREAEmpqAjLimvr0qnAiIgAjkJvDhhx/aZZdd5n8K4Kc//al9/PHHdvXVVxs7KfL9Fjsr5paiGOUiAG+4w5/7wP3gvvBTDdwn7le58pKceiQgnURABEQgNwEZcbkZKYYIiIAINB2Br776yv785z/b4MGDbfXVV7e///3vNnLkSGPHRHZOZAfFpit0AxaI+8D94L5wf7hPq622mr9v3D/uYwMWSyqLgAhUgoBkthQBGXEtdbtVWBEQgVYn8MADD9gBBxxgXbt2tZtvvtmGDBli8+fPb99xstX51HP5w06WCxYs8PcNI44NUQ488EDjvtaz7tJNBERABESgvATKacSVVzNJEwEREAERKAsBVm9GjBhhvXv3trPOOss22mgje/PNN23ixInGjohLLbVUWfKRkOoQ4H5x39jJ8o033rANN9zQ+G6O+3v88cf7VdXqaKJcREAEREAEakVARlytyCvfCAGdioAIlJsARtro0aO9wbbffvtZly5d7P7777fHH3+8fcfJcucpedUnEN3Jkvu7zDLLGPcbQ537Tz2ovlbKUQREQAREoNIEZMRVmrDki4AIVI6AJHcgMG/ePLvyyittm222sa222srmzJnjNyx57bXX7IwzzvA7TnZIoIumIsBOltxn7jcboHD/qQfUB+oF9aOpCqzCiIAIiEALE5AR18I3X0UXARFofAKLFi2yW265xXbffXfr0aOHTZ061a+0zZ071y699FLbeuutG7+QFShBs4vkvnP/qQfHHHOMrxfUD+oJ9YV60+wM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RKCuCHz11Vd200032a677mqrr766TZs2zU444QR7//337aKLLvI7TtaVwlLGE8CwwshiNcZ7VOgP8smH/CqUhcSWQCDsZEl7HTlypD3zzDO+HdOeade07xLEK6kIiIAINBQBGXENdbukbKsQUDnLS+D++++3Aw44wLp27Wrjx4+3PfbYw6+8jR071tgRr7y5SVo5CbD6wiuOrJKVU26aLPIhP/JNiyP/2hOg3dJ+58+f79sz7Zr2TTunvddeQ2kgAiIgApUlICOusnwlXQREoEYEnn76aRsxYoT17t3bzj77bOvbt6+99dZbNnHiRBs2bJgttdRSNdKsotk2nXB+PwzDqpoFIz/yrWaeyqs4ArRj2jPtmvZNO6e90+5p//QDxUlWKhEQARGobwIy4ur7/kg7ERCBAgi8+eabNnr0aNtoo41s//33ty5dutgDDzxgjz/+uB199NF+x8kCxClqHRA4/fTTjVccq6kK+ZFvNfOsfV6NrwE7ytLOae+0e9r//m39AP0B/QL9Q+OXUiUQAREQgQwBGXEZDvorAiLQoATmzZtnV155pW2zzTa21VZb2Zw5c4wND1577TU744wz/I6TDVo0qS0CIlAkAXaapf3TD9Af0C/QP9BP0F/QbxQpWsniBHQtAiJQEwIy4mqCXZmKgAiUQmDRokV2yy232O677249evSwqVOn2jHHHGNz5861sONkKfKVVgREoHkIsAMt/QL9A/0E/QX9Bv0H/Qj9SfOUViURgcYhIE1LIyAjrjR+Si0CIlBFAg899JANHz7cunXrZtdff73flGTBggXtO05WURVlJQIi0IAEwk6W9BtsjnJ9Wz9Cf0K/Qv/SgEWSyiIgAi1KoIWNuBa94yq2CDQYAXYK5GcA1lhjDTvllFOM343iN6PYgY6d6JZZZpkGK5HUFQERqDUB+g36D/oR+hP6FfoX+hn6G/qdWuuo/EVABEQgGwEZcdnoKEwEkgjIr+IEZs6caeedd55tvPHGNnToUFtyySVtwoQJxk5z7DjHznMVV0IZiIAItAQB+hP6FfoX+hn6m7322stvqEM/RH/UEiBUSBEQgYYiICOuoW6XlBWB5iXwySef2DXXXGMDBw60TTfd1N5++20bM2aMvfHGG+07TjZ66aW/CIhAfROI7mR5wQUX+H6oX79+tt122/n+iX6qvksg7URABFqFgIy4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YxxkPGRcrGT+ki0CrUhARlwr3nWVuewEFi5caNddd53tsMMOtuGGG/qNSc455xybMWNG+46TZc9UAkWgsgQkXQREQAQKJhB2smT8YxxkYxTGRcZHxknGy4KFKoEIiEAnAjLiOiGRhwjkT2DChAm29957Gz+Qet9999mBBx7ov3PjGwF28MpfkmKKgAiIQLMQUP1HUUIAABAASURBVDlEIEOAcZDxcMGCBX58ZJxkvGTcZPzMxNJfERCBYgjIiCuGmtK0NIEpU6bYkUcead/73vfskksusf79+9uHH35o7NDFTl0tDUeFFwEREAEREIEEAoyPjJOMl4ybjJ8rrbSSH08ZV30S/REBEcibgIy4vFEpYisTePnll+20006zdddd144++mjr1auXPfnkk/7nAdiRi525WpmPyi4CIiACIiAC+RBgvGTcZCfLJ554wo+njKuMr4yzjLf5yFEcEYgSaMVzGXGteNdV5rwIzJ492y6++GLbYostbKeddrLPP//cbrjhBnv++efbd5zMS5AiiYAIiIAIiIAIdCIQdrJkXGV8/eKLL/x4y7jL+Ms43CmRPERABDwBGXEeQ6l/lL5ZCHz55Zc2btw4P4jwVHD69On2u9/9zt555x1jhy122mqWsqocIiACIiACIlAvBBhff//73/vxlnGX8ZdxmIeojMuMz/Wiq/QQgXogICOuHu6CdKg5gYkTJ9qwYcOsa9eudtddd9k+++xj8+fPt2uvvdbvOFkxBSVYBERABERABESgAwF2smT8ZRxmPGZcZnxmnGa87hBZFyLQogRkxLXojVexzR5//HH/fVvPnj39Ktvmm29u7733njfihg4daksuuaQwiUDdEpBiIiACItDsBBiHGY8x4hifGad5K4Zxm+/oGMebnYHKJwJpBGTEpZGRf1MSeO211+yMM86wDTbYwPiwesUVV7RJkybZ5MmT7YgjjvA7TjZlwVUoERABEcgQ0F8RaEgC7AjNOM14Palt3Gb8ZhxnPD+jbVxnfG/IgklpESiSgIy4IsEpWeMQmDt3rl166aW29dZbG79Zw+/V/PGPfzTetz/11FP9jpONUxppKgIiIAIiIAK1IFA/efKtHOM34zjjOeM64zvjPOM94379aCtNRKAyBGTEVYarpNaYwH/+8x+76aabbNddd7U+ffrYtGnT7MQTT7T333/fLrroIr/j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nHGGbbDBBn5DkhVXXNEmTZpkkydPbt9xsuJKKAMREAEREAEREAEREIGSCYSdLJnHTWqbzzGvY4MU5nlntM33mPeVnIkEVJJAWWTLiCsLxvoTMnfuXP9TAFtvvbXx2yQsw//xj3+06dOnt+84WX9aSyMREAEREAEREAEREIF8CfCtHDtZMr9jnsd8j3kf8z9+uoD5YL6yFK+xCMiIa6z7lVXb//znP3bTTTfZrrvuamussYZNmzbNTjzxRHv//ffbd5z0AvRHBERABERABERABESgqQiEnSyZ9zH/Yx7IfJB5IfND5olNVeAWL4yMuCaoAPfff78dcMABfoOS8ePH2x577GHz5883djBiJ6MmKKKKUCcEpIYIiIAIiIAIiED9E2D+xzyQ+SDzQuaHbIjCfJF5Y/2XQBrmIiAjLhehOg1/+umnbcSIEcYPQ44ePdr69u1r//znP42ditix6Dvf+U6dai61REAEWpCAiiwCIiACIlADAswHmRcyP2SeyHyReSPzR+aRzCdroJayLAMBGXFlgFgtEW+++abR8DbccEO/8rbsssvaX//6V5s6dWr7jpPV0kX5iIAIiIAIiEDlCSgHERCBchEIO1kyb2T+yDySlTnmlcwvmWeWKy/JqTwBGXGVZ5w1B95VHjlyZGqcefPm2ZVXXmkDBgwwPlLlA9XLL7/cXn31VTv99NP9jpOpiRUgAiIgAiIgAiIgAq1IQGXOSoCdLJlHMp9kXsn8knkm803mncw/0wSccMIJfu+FtHD5V4eAjLjqcE7MZeedd7Y5c+ZYv379OoQvWrTIeHd5yJAhxlMTfvvjuOOO83EvueQSb8x1SKALERABERABERABERABESiCAMYb80vmpMw3mXcy/2QeynyUeWlU7MYbb2wYfcxjo/7Nct4o5ZARV6M7xUemjzzyiC211FK22mqreS0efPBBO/jgg/0GJePGjbNddtnFFixYYDfeeKM/95H0RwREQAREQAREQAREQAQqQIC5J/NO5p+cMx9lQxTmp8xTyXL11Vc3vrVjHrvnnnviJVcDAjLiagB9n332sfvuu88+//xz+/LLL40G0qdPHzvttNNs/fXX969KEr7//vvb0ksvXQMNlaUIiIAIiIAIiIAIiECrEmD+yTyU+SivXK6//vp+nsp8lXkr81fmsffee68xr21VTrUst4y4KtM/6KCD7K677rIvvvjC5+ycsxkzZtjdd99tTz31lLGMzY5BPlB/RKAQAoorAiIgAiIgAiIgAmUmwLyU+SnzVOarzFtDFhhyzGuHDx8evHSsEgEZcVUCTTYDBw70r0ZS4bnGYcxNnjzZ7zLJtZwIiIAIVJuA8hMBERABERCBfAiwqyXzVlbiQnzmtTfccIMxzw1+OlaewBK/uWiSyVWHwdzPl7buPdeyLl2/Z0ss8S379ne+a0st09UWuW/bSaNOtu//aCvdizLUx8o3G+UgAqUR+OsvdjM5MWiCOtBej0trEUotApUncOXxN5tcaQz6rr2pjTpplC1h37Iu313WvvNfS7XNZ5ewbl26W68Vetv//18mxlWsZ34l7qi9tza5yjO48667bMrTL9lzr39g/5j9f/bI06/b2FvutXMvusoOPvw4GzHiON2HEuti5YcB5SAC5SEwYNQpJicGzVAHytMiJKW1CNSmtDsduI3JFc/giKMOt0MOPNzOO/sCu+GPf7bH/vqkzZz+vr349Cs26aHH7MabbxTfKtUxWpA34jiRqz6BlXv0sv9fv81tp8G/tBGjRtt2O+5afSWUowiIgAiIgAiIgAiIgAjkIPCzbXe0E445yXbZcbBt3LefrbxSjxwpKhAske0Elmg/04kIiIAIiIAIiIAIiIAIiIAIiEDdE5ARV9gtUmwREAEREAEREAEREAEREAERqCkBGXE1xa/MW4eASioCIiACIiACIiACIiAC5SEgI648HCVFBERABCpDQFJFQAREQAREQAREIEZARlwMiC5FQAREQAREoBkIqAwiIAIiIALNS0BGXPPeW5VMBERABERABERABAoloPgiIAINQEBGXAPcJKkoAiIgAiJzVUvoAAAQAElEQVQgAiIgAiIgAvVNQNpVk4CMuGrSVl4iIAIiIAJlIfDca69Z9y23sguuH1sWeQs//9y2G35I2eSVRSkJEQEREIEEAseNOspwCUFV8yL/LQb2sw//NbdseU5/5SVbb5M1fdkenvSgPxYi/LPPP/Np0In0V157WSHJGy5uUxlx1aY/8qgDDBfP95EH77F1eizZKexfcz+wAW2VE8c56V5+6TnbaI3lfHzS7LPbT+3zzxYSJCcCIiACLUHgoNN+Z0tt3K+TW/vng2zORx91YrCwzeA64cKL7LzjjrVbH/irYdB1ipTF494pU7zBhpwQ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ERCBhiAgI64hbpOUFAEREAEREAEREIH6JSDNREAEqktARlx1eSs3ERABERABERABERABERCBDAH9LZKAjLgiwSmZCIiACIiACIiACIiACIiACNSCgDfinHPmXIs6lbup7n0tGpHyFIFiCDinPtc5MXCu8RkUU/+VRgRqQcC5xm9vzqkMzokB7WeJRYsWmZwYNFMdoGJXwykPESiWQDO1t3ouC/ennvVrJt1gLScC9UygmdqbyqJ5O3XAr8TVc6OTbiIgAiLQZARUHBEQAREQAREQAREoiYCMuJLwKbEIiIAIiIAIVIuA8hEBERABERCBDAEZcRkO+isCIiACIiACIiACzUlApRIBEWg6AjLimu6WqkAiIAIiIAIiIAIiIAIiUDoBSahfAjLi6vfeSDMREAEREAEREAEREAEREAER6ESgzo24TvrKQwREQAREQAREQAREQAREQARamoCMuJa+/U1ceBVNBERABERABERABERABJqUgIy4Jr2xKpYIiEBxBJRKBERABERABERABOqdgIy4er9D0k8EREAERKARCEhHERABERABEagaARlxVUOtjERABERABERABEQgTkDXIiACIlA4ARlxhTNTChEQAREQAREQAREQARGoLQHl3tIEZMS19O1X4UVABERABERABERABERABBqNQClGXKOVVfqKgAiIgAiIgAiIgAiIgAiIQMMTkBHX8LewEQsgnUVABERABERABERABERABIolICOuWHJKJwIiUH0CylEEREAEREAEREAERMBkxKkSiIAIiIAIND0BFVAEREAEREAEmomAjLhmupsqiwiIgAiIgAiIQDkJSJYIiIAI1CUBGXF1eVuklAiIgAiIgAiIgAiIQOMSkOYiUFkCMuIqy1fSRUAEREAEREAEREAEREAERCA/AnnGkhGXJyhFEwEREAEREAEREAEREAEREIF6ICAjrh7uQn3pIG1EQAREQAREQAREQAREQATqmICMuDq+OVJNBBqLgLQVAREQAREQAREQARGoBgEZcdWgrDxEQAREQATSCShEBERABERABESgIAIy4grCpcgiIAIiIAIiIAL1QkB6iIAIiECrEpAR16p3XuUWAREQAREQAREQgdYkoFKLQMMTkBHX8LdQBRABERABERABERABERABEag8gfrJQUZc/dwLaSICIiACIiACIiACIiACIiACOQnIiMuJqL4iSBsREAEREAEREAEREAEREIHWJiAjrrXvv0rfOgRUUhEQAREQAREQAREQgSYhICOuSW6kiiECIiAClSEgqSIgAiIgAiIgAvVGQEZcvd0R6SMCIiACIiACzUBAZRABERABEagYARlxFUMrwSIgAiIgAiIgAiIgAoUSUHwREIHcBGTE5WakGCIgAiIgAiIgAiIgAiIgAvVNoKW0kxHXUrdbhRUBERABERABERABERABEWh0AjLiynkHJUsEREAEREAEREAEREAEREAEKkxARlyFAUu8CORDQHFEQAREQAREQAREQAREIF8CMuLyJaV4IiACIlB/BKSRCIiACIiACIhACxKQEdeCN11FFgEREAERaHUCKr8IiIAIiEAjE5AR18h3T7qLgAiIgAiIgAiIQDUJKC8REIG6ICAjri5ug5QQAREQAREQAREQAREQgeYloJKVl4CMuPLylDQREAEREAEREAEREAEREAERqCiBFjLiKspRwkVABERABERABERABERABESgKgRkxFUFszJpaAJSXgREQAREQAREQAREQATqiICMuDq6GVJFBESguQioNCIgAiIgAiIgAiJQCQIy4ipBVTJFQAREQAREoHgCSikCIiACIiACWQnIiMuKR4EiIAIiIAIiIAIi0CgEpKcIiECrEJAR1yp3WuUUAREQAREQAREQAREQgSQC8ms4AjLiGu6WSWEREAEREAEREAEREAEREIFWJlAvRlwr3wOVXQREQAREQAREQAREQAREQATyJiAjLm9UilifBKSVCIiACIiACIiACIiACLQWARlxrXW/VVoREIFAQEcREAEREAEREAERaFACMuIa9MZJbREQAREQgdoQUK4iIAIiIAIiUGsCMuJqfQeUvwiIgAiIgAiIQCsQUBlFQAREoGwEZMSVDaUEiYAIiIAIiIAIiIAIiEC5CUieCHQmICOuMxP5iIAIiIAIiIAIiIAIiIAIiEDdEsjLiKtb7aWYCIiACIiACIiACIiACIiACLQYARlxLXbDq1xcZScCIiACIiACIiACIiACIlBmAjLiygxU4kRABMpBQDJEQAREQAREQAREQATSCMiISyMjfxEQAREQgcYjII1FQAREQAREoAUIyIhrgZusIoqACIiACIiACGQnoFAREAERaCQCMuIa6W5JVxEQAREQAREQAREQgXoiIF1EoCYEZMTVBLsyFQEREAEREAEREAEREAERaF0CpZVcRlxp/JRaBERABERABERABERABERABKpKQEZcVXHXV2bSRgREQAREQAREQAREQAREoPEIyIhrvHsmjUWg1gSUvwiIgAiIgAiIgAiIQA0JyIirIXxlLQIiIAKtRUClFQEREAEREAERKAcBGXHloCgZIiACIiACIiAClSMgySIgAiIgAh0IyIjrgEMXIiACIiACIiACIiACzUJA5RCBZiUgI65Z76zKJQIiIAIiIAIiIAIiIAIiUAyBuk8jI67ub5EUFAEREAEREAEREAEREAEREIHFBGTELWZRX2fSRgREQAREoCACY8aMsWWWWcb+8Ic/dEjH9dJLL22EdwjQhQiIgAiIgAg0KAEZcQ1646S2CKQRkL8ItCqBQw45xP7zn//YGWecYT169PAYOHL91VdfGeHeU39EQAREQAREoMEJyIhr8Bso9UVABESgTAQaXsyyyy5rI0aMsE8//dTmzp1rXHPkGn+uG76QKoAIiIAIiIAItBGQEdcGQf9FQAREQASag8CoUaPsW9/6li8MxhsnXOPPuVwlCEimCIiACIhAtQnIiKs2ceUnAiIgAiJQMQKsth177LH27W9/2+fBkWv8vYf+iIAI1A8BaSICIlA0ARlxRaNTQhEQAREQgXokwKrbEktkhjeOXNejntJJBERABESgOAJKZZYZ5URCBERABERABJqEAKturL4tueSSxpHrJimaiiECIiACIiACnoCMOI+h0D+KLwIiIAIiUM8EWH3bddddjWM96yndREAEREAERKAYAkuw9bJzzpxzflvmIET+GRLiIA7UgQwF823EuRLayzeCkOmc5IhDpkKIQ/k5LLfccnbHHXfYhRdemBHe9lec2yC0/ReHNght/8WhDULbf3Fog9D2XxzaILT9F4c2CG3/G4GDX4lbtGiR4X73u9+1qZ35zzl+OM4zvmac44fjXP6LPBNxEAfaBE7tQv0JdYC6gOO8HP2D5KheUQeoUzjOVa807lAXcKoP6h+oA9QFHOfqH5q/f1ji9NNPD/dZRxEQAREQAREQgeYioNKIgAiIgAg0GQFWCv1KXJOVS8URAREQAREQAREQAREoiYASi4AI1CsBFuG0Elevd0d6iYAIiIAIiIAIiIAIiECjEZC+VSGwRPS92arkqExEQAREQAREQAREQAREQAREQASKIuBX4opKWd+JpJ0IiIAIiIAIiIAIiIAIiIAINCUBFuH8Tww0ZelUKBEomIASiIAIiIAIiIAIiIAIiED9E9A3cfV/j6ShCIhAvROQfiIgAiIgAiIgAiJQJQLanbJKoJWNCIiACIiACCQRkJ8IiIAIiIAIFErAfxPHn0ITKr4IiIAIiIAIiIAIiEDNCChjERCBFieg3SlbvAKo+CIgAiIgAiIgAiIgAq1CQOVsBgIswi3RDAVRGURABERABERABERABERABESgFQjUZHfKVgCrMoqACIiACIiACIiACIiACIhApQhod8pKkZXcchOQPBEQAREQAREQAREQARFoeQLanbLlq4AAiEArEFAZRUAEREAEREAERKB5CPhv4vhTzSKdfPLJ1cxOeYlAVgJjxoyxTz/9NGucZg+k/HBo9nKqfCJQMAElEAEREAEREIEyEvjggw9sypQpZZFYtd0p//jHP1rv3r3t/PPPtzvvvLMsyjerkP3228+cc96dd9557cWcOHGi93POWdSfc+ecrb766kblIAFxBwwYYAsXLuRSLoXAqaeeaiuuuKJxxJhJidaU3pSXcq+wwgq+/E1ZSBVKBESg4QiEMc25zDjonDPGRQrC2OZcxp94+OE4d65+xkF0khMBERCBOIFddtnFBg4caEOGDLHnnnsuHpz3NYtwFd+dMhhvxx13nM2ePdt22mknr3jeWrZYRAaod955x68OTZs2zS6//HJ79tlnvXHGhBs/3M033+z9MNruv/9+z/bwww+3cePGecPt2muvNVZXunTp0mIECyvu6NGjbckll/SsVlppJW/MYNwUJqWxYlM+6hLlpY58+9vftnPOOaexCiFtRUAEmpbACSecYIsWLfKOecNPfvITO/fcc/2YR9/FGIjTONi0VaCVC6ayNzmBm266yZfw7rvvtq222srbRMUYcxXdnTJqvL333nveKFlqqaXslFNO8crrTzKBnXfe2SZNmmTB+Orevbv16tXLGLDmz5/vz9ddd13r1q2b90uS8uijj1rXrl1tk002SQqWX4TAsccea9/97nftiy++sC+//LKpjbm48UZ5KTflP+aYYyJUdCoCIiAC9UHgxBNPtB133NF69uzpxzyNg/VxX6SFCIhAcQTWWWcd23vvvf2bdczBosbcM888U5DQq0vq2AAAEABJREFUJU4//fTFCcp0xuuSRx55pAXjLYj9v//7P9t000294s45HWMM2GkmsOLVkX79+tnQoUP94IX/GmusYcsuuyyn3r366qs+jAEOQ++KK67wFj2rcEcddZSPE/4g2zkxd64zg3nz5tkSS2QWpWlQGDe89nvIIYcEfE1xpDyUi/JRTgpFuSm/c525OCc/58TAOTFwTgycqw4Dxir6JhxvoXzyySd2xBFHcOmdxsHq3AfnlI9zYuCcGDhXfgZjx471Cwh0av/v//0/v5Dwl7/8xb+tiF8+jr4yM3PNJ3YBcXjP87LLLrNVV121g9Hxne98x7Ayw2sSOi7yr4sEDiyNBszcYFZOeFWSd/2Df9IxvHrCa5gY0FtssYU9/PDD3kgO38khO+RTiWMjy+SbsK+//tqjZVWKFeORI0fa1Vdf7f2a5Q/loVyUj3JSLspN+Rv5/kn3jv2IeIhHI9cBxir6JhzjGONZeDMFvzSncVD1vpHrvXRvrfq77777esON/uxb3/qWN+h23XVXu/fee/HKy7EIV5GVOHI/+OCD7d1337ULL7yw3Zjj6f/ZZ59NsFweBBi4MMJYcSP6zJkz/WupnOPWX399Du0ufB+33XbbGcYf3xKE7+TaI+mkA4GLL77YNySMGoybESNG2IcffmhnnXVWhwcQHRI16AWruJSL8lFOyku5aZcXXXRRrUqlfEVABESgEwE25XryySf9BgDRQI2DURo6FwERaDQCb7zxhvE9L4Y7czA2Opk6darf9JG3FQspT8V3p4wac6ussoq3Mu+4445CdGypuGxswquUFBqjjO/j9thjD+PVyuWXX95vYPL666/bggULvB/xgmNTE16t5NuB4KdjdgKjRo2yr776yjBqMG4wcjB2sqdq7FDKRzkpL+Wm/Prpj8a+p62pvUrdzAQY5ygf34BzxGkchIKcCIhAIxP41a9+5dWPGm8bb7yx9yvkj1+JKyRBKXGDMcfrXLvvvnspopo6LRubUEDnnN/EhJU0/DDMmHgziOE4x4+4OL4dwLJniRZ/jLnwnRx+xJHrTACOH330UVOuvHUubUefYMyF8ncM1ZUIiIAI1I4Ab5KwQRdvpAQtGNvosxkDcZzjF8LzHgdDAh1FQAREoMoE2MiEV8X5/KkY4y2oy6vnS/BhXPCoxpEt3auRTyPnwfdwLLPieM8/lAVjDj8c58GfIztRvvDCC36jE65JRzy+k4sOcoTJLSbAShTGzGKf1juj/HBovZKrxCIgAvVKgDGOsTCuH/6MbTjOo+EaB6M0dF4JApIpAqUSYE7ev3//UsX49BX7Js5L1x8REAEREAEREAEREAEREAERaF0CZS85i3AV2Z2y7JpKoAiIgAiIgAiIgAiIgAiIgAiIgPlv4vgjFk1OQMUTAREQAREQAREQAREQARFoGgIV352yaUipICLQggRUZBEQAREQAREQAREQgfoiwCKcXqesr3sibURABESgGQioDCIgAiIgAiIgAhUiUJPdKStUFokVAREQAREQARFoeAIqgAiIgAiIQD4EtDtlPpQURwREQAREQAREQAREoH4JSDMRaCEC2p2yhW62iioCIiACIiACIiACIiACItCRQCNe+W/i+NOIyktnERABERABERABERABERABEWhFAmXfnfKvv9jN5AphoLj1Xl+aoWOod8bST/1AoXWgnttloWVRfNX/eq8Dam+qo/VeR5tJv3zaG4twFdmdcsCoU0xODJqhDuTTkGoWp8CMm+F+qAzqV6gDBVb9mkRHTznV12aoAzVpQAVm2gycVQb1F9SBfKu+dqfMl5TiiYAIiEATEVBRREAEREAEREAEGpuAdqds7Psn7UVABERABESgWgSUjwiIgAiIQB0Q0O6UdXATpIIIiIAIiIAIiIAINDcBlU4ERKCcBPw3cfwpp1DJEgEREAEREAEREAEREAEREIGSCUhAKoGy706ZmpMCREAEREAEREAEREAEREAEREAESiLAIlxFdqcsSav6SixtREAEREAEREAEREAEREAERKBuCGh3yrq5FYsVmfPRR7b2zwfZvVOmLPbUWQMSkMoiIAIiIAIiIAIiIAKVIHDB9WNtu+GH2MLPP6+E+IaQqd0p6+w23XjPvfbrPX9hO/XvX2eaSR0REIGqEFAmIiACIiACIiACqQRY8Pjr44/bDf9zjnVZeunUeM0coN0pY3cXax6rHus+FlSVS/KnUuI4r0qmVciEVUVWF2l0VchOWYhARQjQJmvZP5RSKNrgUhv386v8aoelkKzvtI2u3XOvvWZr7biTcaxkWQ467XeGq2Qeki0CIlA5As+++qo99uxzxrFyudS3ZP9NHH/qW83yaYdxxiSMyViS1MnTptlqPXva8fvvlxRspA8dP5OibLISBeTwvOrW23z+6MA5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d1YeeXKD4ykOT3OijbDc+UmeCBRLgLoaf9perCylEwER6EiAV7X4nSdeueoYoqs0AnwqQL+UFi5/EagEAdoqq+bIZqWbYy0dbUBjc3nvgHan/IZneBLA0wPOv/Eu+wHZ5IHjvOwZVEggTz944hEcT0EqlJUXqz8iUCwB6mp4IlisDKUTARFIJsDDu+gKVXIs+UYJMF7SL0X9OMdPfRUk5CpBgLbKCli9zDdV38t/l/03cfwpv2hJFAEREIGqE1CGIiACIiACIiACItASBLQ7ZUvcZhVSBERABEQgnYBCREAEREAERKBxCLAI13K7UzbO7ZGmIiACIiACIiACdU1AyomACIhADQi03O6UNWCsLEVABERABERABERABESgAwFdiECpBLQ7ZakElV4EREAEREAEREAEREAEREAEKk/A56DdKT0G/REBERABERABERABERABERCBxiDgv4njT2OoKy3rgoCUEAEREAEREAEREAEREAERqCmBiuxOOemcs01ODJqhDtS0dZY581rfD+WvPqFcdaDMTaMi4spVVslRu6l1HahIAymz0FozUv5qp+WqA/k2DRbhyr475Q63T7Cf3XaXnBg0RR2gPufboOo5HuVQu1S/1KB1oFNfQn1We1N9bpb6XO/lUHtTW6v3OtpM+uXb3rQ7ZT3PAqSbCIiACIiACIhACQSUVAREQASal4B2p2zee6uSiYAIiIAIiIAIiIAIFEpA8UWgzglod8o6v0FSTwREQAREQAREQAREQAREoDEIVEtL/00cf6qVofIRAREQAREQAREQAREQAREQAREojUBFdqcsTSWlLp6AUoqACIiACIiACIiACIiACDQzARbhyr47ZTMDU9lEoGkJqGAiIAIiIAIiIAIiIAINQUC7UzbEbZKSIiACIlC/BKSZCIiACIiACIhA9Qlod8rqM1eOIiACIiACItDqBFR+ERABERCBIglod8oiwSmZCIiACIiACIiACIhALQgoTxEQAf9NHH+EQgREoLEJjBkzxj799NPGLoS0F4EGIaD21iA3Smo2BQG1t6a4jfVRiCbTQrtTNtkNVXFak8Cpp55qK664onGUMdeadUClrh4B2pnaW/V4K6fWJqD21tr3X6VPJsAinHanTGZTCV/JFIGKERg9erQtueSSxhPLlVZaScZcxUhLsAiYqb2pFohA9QiovVWPtXJqHALanbJx7pU0bWkCuQt/7LHH2ne/+1374osv7Msvv5QxlxuZYohA0QTU3opGp4QiUDABtbeCkSlBixBYguW4FimriikCRRFwzplz9e/mzZtnSyyRWVwPxtz5559vhxxySFHlVqImINDERXCutm1S7a2JK5eK1omAc2pvnaDIQwRqSKDhdqd89tlnbZlllvET6okTJ9YQXfFZf/DBB7b66qtbo+pffMkbN+WiRYusEdwKK6xgX3/9tQfNqtxSSy1lI0eOtKuvvtr76Y8INBOBWrfJarS3Wo4Xlagr1SzPwoULbcCAAXbeeedVoihVkxnK4Zyz/fbbr2r5xjNqhfYWL7OuFxOgHdGeqI+Lfat/Vs4+hLJQJspW/ZKUniOLcA21ErfJJpvYaaedZnfffbftvPPOpROogYRx48bZ4Ycf3rD61wCZssyDwMUXX+xfpQzG24gRI+zDDz+0s846y5Zddtk8JCiKCIhAvgSq1d6abbzo2bOn3XnnnXbttdcaE6h8eRcT79FHH/UPTE844YRiktdNmi5duvjX44888kgbO3Zs3eiVRZGyB1WrvZVd8SYSSDtiAYJ2VctilbNPpCyUibLVskyl5N1Qu1OyEnfmmWfaq6++WkqZE9OyMuacq+gKGYPW/fffbzjOExUpkyfloXLy1KJMIssmhrLz9APHeSmCSY+cRn2SUkrZo2lHjRplX331lVXLeKMtrrbaasYxqkc1z8mblfly33uediN30qRJNnjw4ILLSNtDJ+omsqrVBsm3lm2estYy/2rWvWq0N+oPYwWO82qWr9J5PfTQQ3b55ZdXNJvbb7/daMOVbn/0Q5XsC7n39OvTp08v2fClj3DOeeO20lzKeXOr0d6S9C1nn4YsXFI+5fQL95hjOeUGWTxMqFzdCbkkH2kL9Ic4zpNj5e9brT4CjdB3QJnfDDj99NMt8wENOVTZpXV8VHImQKgTPQcAHRm77918880FT6yQl+aQzZPBK6+80u/qV2gFjeoZzSPuz6DFJAfHeTRurnN49e3b19ANfakMaY2UcMrDE0+efOaSXWg498e5ju/HM+lFR2TFy41f1IWnH6VyQGaQle1JSi59kNPojhW3jz76qCwrb0n317mODzhYFacOX3LJJUWho+5Sh6mrxQggXSn9QVr+tC/0eeGFF/yrSwsWLLB1110Xr7zdNtts4x/UsAK6/vrrWyXaIMpwn6jbnON4O4FVfp5Ucl1NB8933nnHhg0bZieeeGI1s65JXqW2N+4bLqo819F+lPZFH4njnLj0sWEc4DrqSE+diPpV65z7n9aeo3pVqt3G8+e62PpIHwBjWMMvqj/XcUcfyP2hT4yHFXJNPs4tHlcpA+mRTR3AcY5fvg4Z0ftCH3HuuecaY8Xs2bO9GO4JcYjrPerwTzHtjftHe3JuMVPnXPvrtZSXclP+pCKT/pNPPim6T+N+hvYYZGW7f7n0SdIx7kfd5ecYip3LxuVFr0MZytHHwwU+yM9WbuIQl3g4+NEOcJzjh160V8rOddTF00fDyLfYPiIqh/Ns+RCOi89V0Re90Z/wYlzd7045duxYC5NzXingqdqhhx5qTLBK7TAt9o9Kj+ypU6fGQoq/jOqPFMqCH45z/CrhYDVhwgQrN6Oorj/5yU+M3yML78mPHz/erwKldYjRtEyKYYDbbbfdokEFnzMoIafghE2WAIMGo6FcxYrfX15hjj+BqyV76ngl+gMMLurT2muvbXTw5EFehXAlPuloG5Vs50k6kR8uKaySftQFynz22We3xCtf5W5vTAKob3Pnzm3vt7mP1EUc55W8f5WUHdU/tA3G2nKO46H+IZ+yhOtq1EfKR37kW4pDDn3Gvvvu2+GTEe49YTjOC8kDvWiXgQtpkfHZZ5+11zPCiENcwuvRFdve+G512rRp7d+0Y7jmuwjQq1cvu/HGG406hOGbz9wmjR1zMeZksE6LUw5/xi/aVWhfXJdDLjLKyQN5+bh4nafu4ofjPB8ZaXGo79R77i/y0uKVy5/8KpFPXX8Tx8AWrHCs1fBUBSscKxa4WNPRpynEJx1hUUcDJJ5zmacyxAvhWPRUUOecrbzyykZDJww5IV5IT36EpbmgJ/GS0juXyZ9wZHDEGsc55/zGLcggLDjKOmTIEHvxxRdt8803tzlz5vigp59+2sd3ruPTJfL1Edr+oD/XOM7bvPwqZmAJE8qGfykOfqxaYNgh57333vOvbDjX8WNsyrLddtv5zWmcc/73lohfDAdkUSYcMnCcO5dhzDl+uDR9CCvRtUTyfv362fLLL9/eNqijoQ7F2yN1Gedccn2OA4vWTeoidZL6EPUnDfcTx3k58w95/upXv/IbIZA3eeDQIXqNX4hPmHOZusY5YTh0dC7jDyN0xZ84gwcPbm+zlBNZhFGX4eic8zrAL6QjPO7QiRUvVt2QyzXHEA8duMZxTjgycc51vC/ogC7OOSMcR/wgK3pElnOZsnEewsjHuY7+QW40jPOQhjycy6TBHx1IE8Jb5QhHDLh77rnHwiQPDvBwLsP4hoEnAAAQAElEQVQHVtSR6DjAdZxRWj8Xl0eeyCSPxx57zN/33/zmN75fjtbZqHzqI3WDNM4t1isaZ5999vEyqMtBP+4t+REPGch3ruMrfUEX9CQe8UnHeZojLroQL54eP+cyOiILGeSdS39kDh061I+1/fv392MlaZO4Io/2TBriBB1OOeUUv4qPHy6qC3HwizrSUw7nMm2f1Z8QHg1zzqV+7gFrmDuXkUE50Y/8kI0cHOfOZbhwjh+Oc+KGfJv1yIPObt26tY9jlDOpzsKEekB855xxTlyYwhZezmU4JnGjztE300dzThzqATJwyAntAFnkhz8uSR/8ccQjPvK4xiE3XHN0LqMX8Ygf4qAH5/gRRlyu4454zmVkcE44aWAQ54F/VBb1ED6Uj3RJjnzhAh90D3GSyk14VAfyci6jG3LIL1efGOSjE8xJhx+yncvICnngn+ZIR/60eec69l+kSeoj8EfH0Dady8yH4QZP5vTRfob4hbiG2Z0SCNwoVnt4UgVIAAAi3wJjqAGS9BhpvFOLXG7MFVdc4Rs1YXvssYfxekS+cqPxqCQHHXSQvfXWW502LjniiCO8UUMerGrstdde7QMEN5LXBTCANt1000758zSFVyM32mgje+qpp6xHjx4+W1YNeXKLPL4VJH8fkPDnqKOOsq5du/rXMdFxypQp/ukUTGCTkKQgr4cffti6tXWONHISohO68hSM947hzP3ivvHKFxwIY4k56F0oB7iQV3DkwX2FI/c4+sQtSZ+QTsfcBLhX8+fPN4x12k229pjrPubOLRODtsj9pN7gnnzySRs4cKCvw+XKn7oyaNAgv4p800032Y477mjUVzSgnEyuMWC5jjvCSE/dIg31mDqYrT95/vnnff8Az2eeecao/8hlUKNfo12gw5tvvol3quOpHk+HeWqf7eleaPcISrsvof1TFvoh4hE/7igb94N40fbFAMgTTfwoF30RcUP6JE6wZWUXdsgjTojfSkfYUV/oq4IBR/mTxgv4RseBeP9HOngm9bvUceoV9SvcI7gzDi299NJGffv3v//txwQ2D2PlgzaHzKgjXpBD3ePzhhBv8uTJxtiC3DXWWKPTa7Xc82ztNppPrnPyoEzoGa//MKU+ESeUNdTHbPqTJ/eAe8FYyxjJCgr+SVzxT3JMDvlGjjB04Ri486obHPALjnsdmMKT7wWjYYzRpEcH7hf9TAgPx3z6D/IJsqhLM2fObO9/gpxmP77++us2Y8YMP45R1rQ6m41VrjqEXFaJaB/00ZzjFxz3n3ZC/eK+ck9CH5ymT0hL/aSuMN7ghyzqOmMU9QK9qfPUfcK55pivo50k9fHIQU/0LbXuJI1ducqN/lEdQltAl1x9ImlhA/MwN6ddwg1O8IqPWaRJcui5xRZb+H6S8Zp2F+KhU1LfmzTnpR4m9TNBVr5H/00cf/JNUO54/M4Olc+5jDXsnDOs83g+QMaPuByZmERXffArxDH4MengSIXiZnKODL5h4ViowwqnkvAtWpAVZNDQyI9JKX58M4OxRgXkmg6fsoUGil8+jsZMGtLy+ldaGsqHYcqTDlhibPFKI/EZAOOdDP65HJUZg825zL2LT0So4HAgH8qKPHSFQ8gPg6B79+4EeVcsB5+47Q8dW2BC3rxWEAbhJH3akuh/CoH4/WXyQGcJV+oQyah3HOPtsdT7iExckE9HS6eHH/WpnPkfdthh3nCjH0A+RiJPwpmYkg8DF2UmLO5CXUPP0P6QQ3sLaeL9SVI9pH/AcIIjeTD4B3lcF+vQI7R7ZCTdF8rJoM1kmPZJ38SrtMSPu7T2xUZTPJihzLQ3+jnihvRJnGDLRJ/8yJf8Q/xWOTLWRScBodzUB/pJOOIHI/rQMF7gZyl/kuoXbYfxknpFsnCPhg8fbsjFj9fOovWP+KQjLOqIRxvBL+jHOS6pfuEfHPecc9oLR/IjH9o314W4eLsNaXlNkPoc6lwoK3WUONn0JzzNJXFNikt5fvvb3/odqEPbCpzQhTGJdhLScq9p+4EpcUJ8wvKpB8RDBjyRy31O6j8Y63HEYeym/XHezC4+x6TuYTDBmXKn1Vk44YgTZ1VsHUIWjnaQNgdL04d0wVFXksYoHqSvueaa/hvu0KcyBlAPQ9pcR/rt0Haop9RXWMECR/o4D/xKdbnKTR3Ppy0k6RGfm8MjWx+RJCP4oSfti2vaG+0O3bhO6iO4D+idNuclXamuprtT0hio0Fj3wQVA8YLNmjXLPz1xzhkNkach+QxqQU6A6FzG6OCJA2HcUOA7l/FPGlSJl8thhW+99dZGQ0qLu8suu/hXTWgETJLDwEJnil9aujT/+AQxLR5P3HgiRIUKeabFxR82zmV4MIkNlZSw4JjoMfiG+0ZnQaMP4Wm6RWVjxHEfQ5piOZCe+4gOnCe5NH2S4srPLHp/aZNMLOjMA5ts7bGU+xjkc6Q+Uf/oI2hXPAGjDhNWjvxpgz/84Q+NFT7qD3IxEjkygWVAo9xcJ7mkOoWcbP1JUhr6sY8//jgpi5L8ou0eQUn3hTZMPMKzOcqV1L6S/ONljF+TTz79EPGa2TEh4N5TX3haC8toedPGi2ic+HkSa+L06dOnw0+NEI8Vt9CmeZhGf0zcbC5bvKT6FZeVrd3G46ZdJ7XbeFzGcecyYxjGcqhv2fSPy4hewyt6nXbOeMZqG31Xvm2LCX029rnqAXUon/6D1QheJ3PO+boAx7RyNIt/0hyTB22hfGl1NhurYutQyDPUxXAdPabpE42TbYzinjKXdM4Z9Ya+nXoYTZ92Tv+T1McTPxsPwkt1+ZSbPCiTc4vrbzaWxMelzc3T+gjSpLlseqb1EdnmvGn55OvPIlzNdqfMV8kQLzqpxHDgiVsYgEIcjtluKk8SSEunR0dLxeSpDOmo6IRh7HAdd4TTIOL+4Zon0WyDyxIpcoN/OPI9EZNR8gguGJYhTqWOTBIYVJCfVtEIC45OLuhIow5pQ3ixR4zB8AoV8rkPSU8Mi5HP5J4JfzFplSY7AdoET5N4BSHEzLc9hvj5HuPtDCOK1W0MLZ5ABjnlyB8ZdOS8Zhz6AeoRxuL111/vNzbhgVHIM59jkEM5qOOwy5WOCRwTg1zxCg2Ptvu0tAz4DExp4cEfLkntK8k/Wx8c5OXTD4W4zXoM9yfUmXCkvOUeL95++22/ERWycfF7hBFAf0wYR645L7ejzYW2QfsoZhxHRrzdxvVk4ob84Bj743Eqcc3KZphk59u2WL2DeZI++dSDfPoPOLPajeEOE+4BHJPybHU/jJlKsiq176PPTRujeODK/Q0uaf7GvU+ayyI3qY+P8PCvEZI+re5QjyvVd+TTFpLqbtrcvJg+Am6Un3woK5+YcJ7mKjnnJc+6350SJXFMpIAXvh9hMkllAxDhzzzzjPHknOtJkybh1cnxnjrpQkDS0y/S81pgiMORZVcqMQYYTxHxS3MYOzxR5RWmaBz8ecc++GPk8UQMCz0ar1znMKAs6I3+Ubl0+LwTDi/84YLjvNqOJ6Q8uSxXvnSOlJdyU37qSKUYl0vnRpBD/b3sssuMtgHXXO2xmDKF+xZvZ+TFd2RMdMLkCL9s/UGh+fNaBA9fKBtpMRavu+46o/5QdvyKcciDWa605BHtH4ptF9nafZoODNy8PsO3OLQb+lie5ibFT2tf+FNOykvflmsFE9nRe0i+5I9/KzruAeUP32XE6wNMSxkvaDeMd9Qr+CKP+0w95xrHa2esdnPOMbyWxXW5XPSeI5PxmDZGveE6n3GceMHF2y3+cIrWZ2STB3kRXm733HPP+bkHcqn3HIPjvpJ38Ic7q68cQ5ykex3iJ4VRvviYFo/Hfc41rnL/09p50E3HDIFysyrHHIy2Gx+j8EPXUL+Y1/GgiP6VkqSNsYQFR18e4oW2w3UI50ge8boT6ix9B30J8crp4nWcMia1hbQ8SR/m5rTLYvsIbADmKORDmeGLbK7zcfm0zXzkROPU9e6UQdGePXsa3+PwXY5zzhjsuAYeq0Y8rWeAYOdGlltDuuiRJ+JMNJxz/rVMnrSQnicXTAh5akb6k046yT+Bp+KTJoSxGpD29CGaDx9f8vQj3tHylBV/5zKvg/JEDN2jabOd0/Cx+tEx7E6ZFB+ZVCzis9PmVltt1SEaq5foAi/nnC8r1x0iVegC3jwV4R455/yTYZ5c8kQj3ywpV+BAJxNNx8omgyb3knjkBY9oHJ0XR4Dvclix4Qk495H2l9Qei5GerZ2RF/WZTpfOF/n4lTN/2gQdPGVDPpNe6iX9CteFuGz9STY5MMAIc84Z7/CHFWoGK3b7itd1ZDHgMigwWFPP4US9T2r3xE9z9FmE0W6y9XNp7Qv/kDf9Sj59G/eQBwP0BYXqi67N5qiDcIMHYwd9ctJ4wf1N6//SmNBueEgRxj/uEfLJM6ShvjFZc875hzXEJ10IL8eRe57Wbqm/tDd0Y4yDQ6480T/abkN86mN0HKBu4hfCcx1pBxi9uXaNI3/aDjo756x3795+c6+ofDhH7yPXpEuLw7yE3ZtDOPGj6akjsArh4ZjWf4RwJrzIpo9zzvnNm+ir4iuyIX4rH6n35WBF/wzv+AME7j/3NdQb7i/XhTBPGqPichlPQjumfuQzl6WdRNsOc6hf/OIXfuMvyuJcx7oDKx5AYdA4V9zYlW+5YQQr5zrOofPtE2mrpKd/jZcz2kcwnsbvWdCRh628xedcfnNn+jwY0p8513HOm28/E/JOOp5xxhm1+7FvKhxWLceocrz2AGD8oufE45UAlok5ck0cHPHw5wZdeumlib9TBEzCiYcLHWHUn3B+X4PKT+WMhk2YMMHwD+nINzjyDzqTLsRL8idvXIiPPOKTDnn4k47zqAu6oONaa63VQRfCwgeopCE9ecAp6TcwyJNwXDRv0ubj0DFbOvInDrIoF3HJk2v8yReHbiGMcM6JH+Ihh/Ooo6wwwHGOPFyIQxpk4/DHH79wjnzyIT/C5DoTgBWMYBVCOccPlvjR/qhfcObINf5wJR7xuUZWSMN1cNF43EfuJ7Li7QzjhY+HecoY0nIkP/IlDUeu8Y/K5Tqf/OPxWKVm5Y9BlrC4o2yUkbwIQ//Q/jgPZeEY7U/ggD6kSZJBfMqz/fbbGxN1BifKFfIhXdThT3zk4s+Ra3jQtrjGH0dcdCZfrtEjhONHGGkZoFipJ2/ixR1piIdDRghP8g9yyZt4sAmcuMYfOej77rvv+pVP0hDW7A5euGg54QkPuMAh3BP8CCMuDKknOM7xCw55IV5IjyzCiUsaZOGCP2HBMeEjjHjED/7hSF3k/oUwZKAjeUXPiY8e6MM5R645Rwb3m3w4co0/jnj4k3/aOJ6WT9w/yEIe58gnrzT9CQ+O8lCuoB/pg/4hjPyIjz954Ghz9F/EIQzHObIIx4V0hAUXjUNcZIR40TDSk19IFz1yT+BGnGj/gRxkIodzwnGUCYc8wohDeFRmo59zv5PmmKFc+WFXEQAAEABJREFUlJdyU378YAETzgmDEw4/HOHIzKcOIYP4pOeIPGTgj+OaMFzQAb9wThzSRdPgF1zaGIUMZOKoD9QL0nDkGn/qF/kQl7C4I0/i4dCBcOJyjSMcF8JgQlshjHYLH/xwpCN93OFPfORwjj5J94HwkA/hxCMdLviHslE+zqN5JaUnP+IQhhwc5/jhWOHnEwvO446HO+wKTxp0QSfikD7ogx9hIR/8iY+jjwhhIR7sYIWcQt3pp59uDbESV2jBFF8ERKDxCbAKxQMLnrYndXIYeAMGDPA/OVCu0vKUDuPtrLPOsviAUK484nJY9acczmU2YmCFkxUL8qeMxOecYyUcTx6dy+RN2XnimcS7nHlzb1kdcC6TLwMw+ZYzD8nqTIAnzLjOIfJpVALZ+o9GLZP0TidQizEqXZv0kGqMXem5Fx/Ca928iVO8hOqmrOnulNUtqnITARFoJAIYEjyl4klWkt4YNjzV4pgUXowfT894YsaxmPTFpAlP5MgXR5kpO7IoG7/dxnmlHE8RyTe4apSd8lHOkCf3EQ6VKmN15dZvbrQlXFRD7gVPz6lrUX+dNwYB2g3tJ7Ql2hX3tDG0l5aFEqB/5l5zLDRtNePTn1R67KpEeXh7Jqn9wJt2RnurRL7FyPQrccUkVBoREAEREAEREIH6IMDTeb5lCU+/60OrwrRgRRhXWKomi12D4oSVPK3Qlhc+ddk5Z7xlAePySu8sjTzIyzln5N05RuP60L8554y3N3iLo3FLUl7NG2Z3yvIWW9JEQAREQAREoDkIMHljQ5rwCm6jlorXafkRY03SqnsH2W2QBwDxFdrqatF8ubGZCJvH3HPPPVaN1RvyYJMRfsaJtyuaiSirYJRrypQplrRK1kxlLbQsDfFNHJ16fGveQguaLT5WPp1YIz/FzFa+WoXxZM+56jyJYiLDUyjyrFV5lW/jEeCJJa7amtOn8VSRvOl/OFZKh9A2aB+cVyofya0NATY5eOihh4ztvSuhAXWzWuMjGwqxM2Al6inlwFWCEfrSvhpx/GFnQV4T0/ynvDWD3RzhGn5XrLzSO0ujDtJ2pk+fbpx3jlEZH+q8c5Wd5zFGsptxITuZV6a09SW1TLtTll4oOlYqQpokLG+e0oXfWSMeN5VOM15ZmRylbclNurgjfSWeYqJHJQ3PeDmi17l4RuOW8zyeL0/2eBLF1rahI0u7b9n0iMtNiquniUlU5BclwCSFvoG2GfzpVyr19J++hT6KOh/yC0cm3OPHjze2oWb7YbZXD2HhSJ9I3ecaGchCJteFuNA2mIhTXtLCABYw4VquMQlQH5i48QSe3SW5r5SEYznuL/WOTWeGDRtmTEqRTZ1BNnlwna+jLlOn0+In1dO0uHF/9MzVPqj70bYOO9KQNi4vl67x+EF3xrx4WLZrGMISptn0ySajkLB4uSh7/P4WIq+V4lJ34ZdUZjhSl7iHhHNdLq7kSd7Ijbq4P/WbPh7HeTRuoedR2dHzJDnU+fg8Lyle1C9a76P+nMMQljDkmrbBrslXXnmlceQa/3xdmv5p/tnkohO6oWO2eNUK89/E8adaGZaSD8up0SVirnnKwRJyKXJJz5arGIqlyFFa8z/tQIOOsuCe0ZnxkSv+He4bHmVyyCWvMomTmBYhUKv2TzuhznKs9Efq/KYQbQO32267tcidbY1iUn8ZB/kYn81Jyj2OUUeRz9bY1J9KUq10PYVVdKznmrJRxlLLhYxK8ylVx6T06A2DatzfpPybxS9wpE5RpnBdSa7UN8YP8sNxjh+Oc/yq5cgzOs8rJV8YUidhiBzmjvRtoY/jGv9aOHRCN3SsRf5JedbN7pT8wC1PEJzr+FEmlq9zmW2onXPGNQXhGLeIsdCHDBli/K4UPxjKNRY/ry055/zvEOFHehxPN5zLyCYOcfHHQh88eLD/iNK58i8TIx/9yQuLnnJcddVVxhM5dAh+zmV0Ixw/4sddtAych/A0nshBnnMZ2UEPjuSPcy77B6Tk41wmDpwoD/lyJIxzOIf76dzie0o+5I8exAsu+CPPuc73Kq08afnAkbL85je/MecyuuIX8tOxcQhw32ifzi1ui6G+hHpEvaP+pZWKePxUAX1D//79DZnERw5pCKdeRtsh4dTHeN7Ej9Y70lHXkElYmiMvZF100UUdPnYnHfmgQ0hLXFY+xo0b1+Ej9X322cfXZ9oWOhAfPSk/58hAH9JzTZztttvOp3HO2ejRo/1PMsT7SeLKVYcA98q5TJ90yimntNeFtPsY9UdD0uM4p+5Qp5xb3Gdyz7PdX+TRL1KHnMv0zchzLqMTMpGNI65zmbGCONSveDsiXnDUO+of9dm5xTqF8Gz9eLyekgZ5tC2cc531I07UJbUPdEYn5zLl4Bw/HOfkEZVBOWl3tD/OCYtzwA8H68DRuQxL/JGJzjjnkvUmbfQ+zZkzh6T29NNPt889Qv7IQwcfoe0P/lzjOG/z8u066MIR+fgHR7x8yxXS6JghAH/qA/xgzjVvWtH2qEO33XZbezsmBXGcy9Q3uONHu6I+EN+5TBhyCMvXIYM8SUceQXaoy851lEs88ou2R/yQ4ZyzkD6aP36Uk/JyTlhSuyVP5KITcahvlC+MoVzjH3f4R+v9W2+95dlttNFGfpwKLNGTtBydy5SLspAv/pSf/ENZomGEJzl0JT4yCU8qF/7oSBtyLpMveeFPunzyIW41HItwS1Qjo3zyuO6664wPs3nnFUsXWAA/4ogjbNq0acbTaj4U5bWRcBPjcrHQkUFleOqpp3wwleW0007z6YHPAER65F9xxRVGfsjmdabo65rPP/+8UbnIm9+N4HUJL7BCf1ZZZRXjSQPiKTMVCL3Qj9cRk/KnDPfff7/xqiLxoq/T3H333QYD9Oedd+IG2RxJQxx+kwrO+DHBZUtYwvidjCgPwnHEZakeufCBE/5RB184H3744Z47cdGftNF48fPJkyfbFlts4dNwr+hEQhx0jZcnVz5vvvmm/fvf//byqAO8dkSaIFPH+idAZ3rQQQcZHzTTHmgX1L9CNefJGe2DvgFZaSsW0XZIHtRv6jl1ONoPUDepo+i04447GnWN+GmO9kffNXfuXKPN8e0P3zIRn1crqffoyDWOJ370d7ymwlNO/GgfsKB9rrHGGu2vtxGW5KjrSe2QviLaT9JvJqVvUr+aFos+kPpLfaIuTJ06Nac+jE3089xP3JNPPmkDBw70k3bGN17LpR5SH7nfyy67rB9Lqev0mUn3N96fvvrqq76fJK/Q7zOBYyymvqDvmWeeafTjudoR9ZT6HHSirYRCxvOlXVAm9E4bL/4/9u4lZL6zMPz4OYU/FKq0XqiXhaaaUBBEIVqKpPYXEUFIXLRdZOFlpwtFxSykXVSzqkIjihfQVTVCs5C2GKEgYqyICDYgSAXxnkW0CxWqbtrF7/9+J06cvHkv8847lzMzn/B7Zs55znP9POc5c56ZeSfLvC5V/nn1Lvt6WhmFPsVo3jX/2j7LYR3tblwW5+Fzn/vcqh86Jzo3ssq8c2Z24IyHd77zncMf/uEfzv4GKsP+bij3LBfdy1pfTverT0+6nszHt36VVniywFnX45///Oez16XmyO///u8/kaHz5TzXXid6vWiMGoteEzr/n8h8wUbnQdf/Xo9qz2LSxXO886bXmNKXpnlRvsa5141+IKQyStc9cK+xpZuH0+dJ8aXtWtJ5sng/2bHToXvH0+1bTHPeed8CMJd85unrQ32r3tpffPs9F857fe7Y6VBZOdT3efvO6lfj0VxqDtWe6u66V/7TZe56f1K/TtmLRzdWDXB4nSjtP/roo0/8Gk1/P3IVtF58nvGMZwxNlvJ1wfvhD384dPPUIDbRqq9jp8vuBbFjfcWjk7I0mwz1t+/r1+du2grV1wtyE6/t06E8nfDd/NXWPnIuf+nOan8nZ31uMVOeO++8c6hv3USWp3eWXvGKV8x+SalyizsdSlu+6qnOxup0msruwtbFoGPPf/7zh2c+85ltXhiqf3GsevGeX2DO6s9l9TzrWc8aGvMqrdzFG+fihOkLdAH9oz/6o6F5WGubF/Pzqv11h+bUfB5W9lnnXedk5+biuXXbbbeV/MzQO+t9l7+b387Z5k032F2fmpPzm/IzMy9ENj8um58LyWfzeJV5uFiG7fUKdP180YteNDufOxe6Fl9WQ2Nemm5ieu1qu/nQ3Gh7frzzsWtc6Yq/KMzP667NnbvlLf3i62ALu67vna9d73uNbn6U7qLQedr1tjSV21xpzrQ/r7f299pTXA4XnaeVVx9Ld97rUuWU7qx6u2YUSnPR62nHzwrnOdSedbT7dJ31sbLrc2Nz+vh8v9fyFtx9+th50diXp+NdI+d9bv906LrTGwPzuubjW19Pp93j/Y02/dnPfvbQ/FmspP9H30Wu3ZP0Bkx5mk89LxP6xKgFSL/f0HxczNPc6jycl9f9WXOr15fSNS86LzqnehN0Pqdre/fHpbksnDVvz8vTBwF/9md/Npxu53np5/GL15553FnXy877zt/SLNuu8/zOyp9Tns2h6shpmfvX0u4iTObXKc8awED6GHMcx9nHrP0AQHHLhk7iX/7yl08kXxyMToIGcBwfL/v0u1bntWdeWKvyPpYdx7O/KjFPd5Xn+UmzWHYvOr2Tcrqc2t/JfDp+vn9W+3tx71O9eZpO1ib1fL/FYvXN9896XvYi3zt64/i4be69A3VWeYtxF9V/Vn/Ke1E9TbzqLp2wnwLLnm/r7N18HlbmWedd15Vf/OIXHV4q9M76LbfcMvtGwTxDL7jdEHfzVVw3tT1fFC6aH+flu2h+nJdH/GYFuuZ27V22lm6GytOirZuaPuWa5+9Nzq5x4zgO3ah1ne38vKzss87rxTxnvb5clmee/6Lz9LwyLjpPLypvXmfP56Vb5vW0/GeFyxzW0e7T9Z5ndDpdr+V9Wti50Jgv3uucTnvefvc94/j463RfodvF9fa8tk09/rzzrXaf57rqPUmfGP3FX/zFhb9A2/3xOI5D93DdM87H8qJ21tZlwrLnZOdg16c+JFmm3MU059VRX+rTOI5Dfey87162vOfl6dhiOM/vvPwPPfTQbM0xjuNsod51dbG8qWzfd999w+9NpTHzE672zLe7QLYi7gLVx5oNRMeXDb24Lb7TUDnzm6++0lI5nQyV3cWw/WVD71z1rkt5e25/2bxnpeumrvheNHp3tq//VXbt+8u//MsOPSl04e6F/UmRl+w0EZrQ82TVddFCcJ5u8fm8k34xTe8M9ZF941Ufcr/oHcV53sXJWZ4uCPNjZz1fVk9jXTnl7bn9toX9EVjmfKs382tG29cJ83l4URldV3oxvijN4rHmc5/EFTpnO9YNd3Pvn/7pn2ZfIW4+F3/d0PWieVQ51bXKPCyvsDmBxr1r70U1LI5j6Tovexf+9Ke2vTaUtutsYR2vRdXX+Xj69WXZOdb5V5sqp+vudVIUw6QAABAASURBVK/jlbNMOKvePJp/l72enlf+RQ67nl+9Cd0Cv7Z3TVq81ylumTB/je7cKVz06d0y5UnzuMC6Xfv07O/+7u+Gvs3RmxKP1/K7x8a+N3kaw3lYfDPydyk3u1U75p80rqumPl2f96nnrp/z837ZOi7zWyxn1/N6sS2Xbc/+Jq6HyxJu4/hXvvKV2Xf8A2y7F63FenvR6/vDi3GXbXdh6wWkd5hK21cP5l9laX8eqrPvBs/3t/Hcu/DV0zvx/a1N24XToe/i9k7E6fj2u8Hto/ts6kMvui18O3ZWmL8g5Vieyq7uq0y60pavC0l1LuOW/zLvZPSuchei2p7P4otUcZeF0/X0nfXeuS5fz2eNfceE6Qo0h+dfga6VfTJfaLtzt/nTedg1o7irhs6z8lRO5bV9WegFpK9Ddj0p7enzrrjToTd5ylPajlVG87W/BW5OFXedML8ONH+aR2eVVd3LzMOz8opbj0Bj3XnWNbRrcNfixZLPG8cW/f39R1+Zm39qW1wLl8qqjP4Wp3Oq+dD+dUOvL13fK6/rfXPl9OvyWXV0/nUedqw8172OV84y4ax6539nNs+f1Xmvp/M0p5+Xddj0/Ooa11h03nSeLLaz62T3OnP3zoXcS7uYbr7dvUBfpez8K03ldu6Ub57G89UF+nbWplx7zehvteavO/PWFd9ryzy+uVo7LroXnOe97nPXo+6tKqdzb92vL10vm7P1qTp67b/ovC7NeSGns/zOSz+P3/S8ntez6vNkfp2yj0n7RckuRq2a+zi27/b2yVFxz3nOc574QYD5u3xndbq0Xcwqq+P94XB/HDyO49BFsHcyuoC1uu8FsE+nSvu3f/u3Qyv8LmjlW0doEdEL7Tg+/nWFJlYnY5/61ZZxHIfeJexXueb11bbi5h/H9yJYW896F7R3Wrrw1of6PXebl3XW8/wTyPJk3h/Fd4N5Vtqz4krbH5bWr9wq43S6Jktt6dg4jrMfXln8jvbp9PP9LkR9WjGO42ws5m2dHz/9fFk9ffrXi904jkM3I/OxP13OgewfZDc63zoPOt/G8XfnRdeHbiiLP30ediPSxf40SOd8f183/3XKi+bh6byn9xfz9n37zrXTaU7vl6dzsGtAx2p/82J+U17cYujmsReQs/qymK5y59eyPq3p05mOXzQ/ul7Mr5PdwJVe2LxA53PX3K6NnY9dv+e1njeOHW8sb9y4MXSD2GvEPK7Xt37EYBzHode59ku7jvHt9aU6K6t51qdZzbvavTiPastiWPd1fLHsi7Y77zv/x/F314msln09XSy7uddrcNeS8xxyXuV1brGebOfzcP7rlIvH59u5z8eie6E77rhjfmj2XFsa+/m5cN7r3el+df41nrWj8uvrrEAPTxHIbpnrcYZXde01oR/2uOxa3L1X96mnF2i9RhY/jo9/rXo+V5/SiSUj6uv8/D8vS3OrNwG67ozjODT3Fu9ly9drV3Oo7cXQ+bbMed/1sr51/RnHJ9/DL5a37PZ5fov5m0vXndeL5W1y+/3vf/80vk7ZR/gf/ehHZzfufVzaJKjjnSQtdorraxH9emM/3hFyF7WOlaa089CxTuZC250E5a2MeVxpO9b+PL6y5+XVntNtqL7yLRsW662OQu0ofrHu6vy3f/u3YbH8tktfqC2FeXtO19+x0hXmaYqbb+dTHZVZ3vl+6Qvz+J5L1/HSlb9y2j4dOlbe//qv/xq+/e1vz/6HxaUpfcfa7rk0hf5fKZVdHYW25/WUdh66Mejvh8qzmGax3PJ1rHLKd149HSt001x5jXXuxQn7JdBYN4aFxr5zoB50XhTX2Hb9aL/43vToj7nbXgzlK/+y87DyOr8qY563trTfuVS91f+6171u6AWpF6aOzcNZebp+dQ0oTW/QLN6UF7cYqqvya0fbtb0yS1O7im97sS1dS0pX+o6VrjIKi/Nwnqc+PO95zyupsCWBxqbxKLSQn1c7H5PiT49jN3f9QEjvTM/T99y51Plcnp7bL35e1lnj23nTeTFPt3hOFt/xjhXaruxCx4rrHOwcW6yv+HlY53U8q+qqzsqvDbWp7cUwT5dbbV3M07HiCuUtVE5llq7ji2W13fHS99x+edovzOOKb7u4wuL8qszKro55uspoezEsjtOtt946lKe8penY4tiUv3pyr672SzcPjX3HSnPWuJdu3t6e26+M0hfaLk44W6BxmTu13VjNx/f0fpalLbRdiY1P49m4tr+Yp2PtF386lH8+XtVXvaU9K776CvP0pSt9+Sp3MU91Lran4/NQ/nk5i3kqp/Iqt7SVMT/nmnuF4jpW6IeN+vXUthdDBp2jhdPn/ek6qqu2FEpf3sq6qF0dn4fz0p0XX755/6uzuTbvc21puzaWbtdhUr9OuWuMXdTfOxS9U7FPdfcO0Dg+/sli7+D1jlMn/C76oE4CZ72D2dc6+nWsTen0af2NGzee+MPn3v3uXfD5i8tl9c7z94LUO4OXpV/H8a4zzd11lKWM7Qp0jnej01eBFm+QttWKzpvO987bp9QpYqsCnQvLfGKz1Uap7NoCvUlTIcu+hpR2H0JfHe/bJvvQ1n1t42R+nXJfAa/T7hY/vRtwnTJWzbtq3b0T0bsT87Cu9lfuOt/h6GbnvHeZVjWTb3oCZ41z51JhU63tXbjO1fkc6J3I2rFsffP8ldH2svmuk655ukmT67TtmPM2JpedB51bnWNds3dhtUwb5+26Stp5Hs/LC3QuHMrr2vK9PvyULd76af5D62nfcOucPbR+TaU/k/p1yqmgaAcBAgQIECBAgAABApMT0KDfCsz+Jq6H3+57IkCAAAECBAgQIECAAIGJC0zm1ykn7vR48zwSIECAAAECBAgQIEBghwJ9CDeZ/9n3Dh1UTWDjAiogQIAAAQIECBAgsA4Bv065DkVlECBAYHMCSiZAgAABAgQIPEXAr1M+hUQEAQIECBDYdwHtJ0CAAIFDFfDrlIc6svpFgAABAgQIEFhFQB4CBCYvMPubuB4m31INJECAAAECBAgQIEBgsgIatl0Bv065XW+1ESBAgAABAgQIECBAYGWBPoQ7oF+nXNlBRgIECBAgQIAAAQIECOyFgF+n3Ith0siNC6iAAAECBAgQIECAwB4J+HXKPRosTSVAYFoCWkOAAAECBAgQ2LaAX6fctrj6CBAgQIDAMDAgQIAAAQIrC8z+Jq6HlUuQkQABAgQIECBAYEsCqiFAgMDjAhv5dcpxHIdxFMaRwTjut8Hj0+QwHsdxv8diHLV/HBmM47gXE3IcR6+DDA7iHNiHCTeO5ts4XmLg+F7Mx2XnWx/Crf3XKW/evDkImzX4n//5n+Gv//qvh55Zb9Y632Un1JTT1Q9hs+dK89G83Kzx4jlsvm3PetF9Ktvm23bH33zbrvdU5tm8Hebbdsd/mfm2zV+nXKY90iwp8IEPfGD4/Oc/P/S8ZBbJCBDYsEDz0bzcMLLiCfxWwHz7LYQnAlsQMN+2gLxCFX6dcgW0XWb51a9+Ndx///3D//3f/82e299lezZftxoITF+geWheTn+ctPAwBMy3wxhHvdgPAfNtmuPk1ymnOS4Xtqp3Q/p4u0Q9t9+2QIDAKYEt7jYPm49V2XP7bQsECKxfoPnVPKvknttvWyBAYP0Cza/mWSX33H7bwm4FZn8T18Num6H2ZQXm74b87//+7yxLz737X/wswgMBAlsXaP41D5uPVd5z+8W3L+yfgBZPV6B51fxqntXKntsvvn2BAIH1CTSvml/Ns0rtuf3i2xd2K7CRX6fcbZcOt/Z/+Id/mP1oTD182tOe1tNsv/jZjgcCBLYu0Pzr3ckqNi9TEAhsTmDi821zHVcygR0ImG87QF+yyj6EW/uvUy5Zt2RXFOhdj3/8x38c/uAP/mB4znOeM/z6178e/viP/3i2X3zHB/8RILBVgeZd88+83Cq7yo5UwHw70oE/im5Pr5Pm2/TGZLFFfp1yUWPi25/61KeG//f//t/QoP3sZz+btfa///u/Z/vFd3wW6YEAga0JNO+af+bl1shVdMQC5tsRD76ub13AfNs6+ZUrnP065ZVzybB1gXvvvXf4zW9+M7zrXe96Ut3tF9/xJx2wQ4DAxgWad82/5uFiZe0X3/HFeNsECKwu0HxqXjW/Fktpv/iOL8bbJkBgdYHmU/Oq+bVYSvvFd3wx3vZ2Bfw65Xa9D7E2fSJAgAABAgQIECBAYIsCs7+J62GLdaqKAAECwzBAIECAAAECBAgQWFXAr1OuKicfAQIECGxfQI0ECBAgQODIBfoQzq9THvlJoPsECBAgQOAYBPSRAAEChyLQD6r9Xn8Ydygd0g8CBAgQIECAAAECaxRQFIFJCvh1ykkOi0YRIECAAAECBAgQILC/AptreR/C+Trl5nyVTIAAAQIECBAgQIAAgbUKzP4mroe1lqqwyQhoCAECBAgQIECAAAEChyfg1ykPb0z1iMB1BeQnQIAAAQIECBCYqEAfwvk65UQHR7MIECCwfwJaTIAAAQIECGxawK9TblpY+QQIECBAgMDlAlIQIECAwJUE/DrllbgkJkCAAAECBAgQmIqAdhA4RgG/TnmMo67PBAgQIECAAAECBI5bYK97P/ubuB72uhcaT4AAAQIECBAgQIAAgSMS8OuUuxps9RIgQIAAAQIECBAgQOCKAn0I59cpr4gmOYFdC6ifAAECBAgQIEDgeAX8OuXxjr2eEyBwfAJ6TIAAAQIECByIgF+nPJCB1A0CBAgQILAZAaUSIECAwJQE/DrllEZDWwgQIECAAAEChySgLwQIbERg9jdxPWykdIUSIECAAAECBAgQIEDgigKSXy7g1ykvN5KCAAECBAgQIECAAAECkxDoQzi/TnnmUIgkQIAAAQIECBAgQIDA9AT8OuX0xkSL9l1A+wkQIECAAAECBAhsWMCvU24YWPEECBBYRkAaAgQIECBAgMAyAn6dchklaQgQIECAwHQFtIwAAQIEjkxg9jdxPcz73apuHMdhHMehbfEcxtH50FwYRw4cHr8iXuRQinF03RhH8+Wi82Qc+fDpajHM7rXGcVfng3qdh8ufh4+nfPyR2+4dbty4MTzp1yn7I7mbN28OhbYfb+IwtF1coW3xN2cmHDg0JwrmhevG/BxwPrxv9hrCgcNw8l/zonOh0PZJ1Oxf28UV2p5Fnjy0XVyh7ZOo2b+2iyu0PYs8eWi7uELbJ1Gzf20XV2h7Fnny0HZxhbZPomb/2i6u0PYs8uSh7eIKbZ9Ezf61XVyh7VnkyUPbxRXaPoma/Wu7uELbs8iTh7aLK7R9EjX713ZxhbZnkScPbRdXaPskavav7eIKbc8iTx7aLq7Q9knU7F/bxRXankWePLRdXKHtk6jZv7aLK7Q9izx5aLu4QtsnUbN/bRdXaHsWefLQdnGFtk+iZv/aLq7Q9izy5KHt4gptn0TN/rVdXKHtWeTJQ9vFFdo+iZr9a7u4QtuzyJPYC+mfAAAQAElEQVSHtosrtH0SNfvXdnGFtmeRJw9tF1do+yRq9q/t4gptzyJPHtourtD2SdTsX9vFFdqeRZ48tF1coe2TqNm/tosrtD2LPHlou7hC2ydRs39tF1doexZ58tB2cYW2T6Jm/9ourtD2LPLkoe3iCie7T/x73/veNxRXKM3w2//aLq7Q9m+jZ/fMxRXEr+d+6eGHHx78OuX8DPNMgAABAgQIECBAgACBPRDYx0XcHrBqIgECBAgQIECAAAECBDYjYBG3GVelTlJAowgQIECAAAECBAjsv4BF3P6PoR4QILBpAeUTIECAAAECBCYkYBE3ocHQFAIECBA4LAG9IUCAAAECmxCwiNuEqjIJECBAgAABAqsLyEmAAIELBSziLuRxkAABAgQIECBAgMC+CGjnsQhYxB3LSOsnAQIECBAgQIAAAQIHIbD2RdxBqOgEAQIECBAgQIAAAQIEJipgETfRgTnCZukyAQIECBAgQIAAAQJLCFjELYEkCQECUxbQNgIECBAgQIDAcQlYxB3XeOstAQIECMwFPBMgQIAAgT0VsIjb04HTbAIECBAgQGA3AmolQIDArgUs4nY9AuonQIAAAQIECBA4BgF9JLA2AYu4tVEqiAABAgQIECBAgAABAusWeGp5FnFPNRFDgAABAgQIECBAgACByQpYxE12aKbVMK0hQIAAAQIECBAgQGAaAhZx0xgHrSBwqAL6RYAAAQIECBAgsGYBi7g1gyqOAAECBNYhoAwCBAgQIEDgPAGLuPNkxBMgQIAAAQL7J6DFBAgQOAIBi7gjGGRdJECAAAECBAgQuFjAUQL7JGARt0+jpa0ECBAgQIAAAQIECExJYCdtsYjbCbtKCRAgQIAAAQIECBAgsJqARdxqbtPKpTUECBAgQIAAAQIECByNgEXc0Qy1jhJ4qoAYAgQIECBAgACB/ROwiNu/MdNiAgQI7FpA/QQIECBAgMAOBSzidoivagIECBAgcFwCekuAAAEC6xCwiFuHojIIECBAgAABAgQ2J6BkAgSeJGAR9yQOOwQIECBAgAABAgQIHIrAofbDIu5QR1a/CBAgQIAAAQIECBA4SAGLuI0PqwoIECBAgAABAgQIECCwPgGLuPVZKonAegWURoAAAQIECBAgQOAMAYu4M1BEESBAYJ8FtJ0AAQIECBA4bAGLuMMeX70jQIAAAQLLCkhHgAABAnsiYBG3JwOlmQQIECBAgACBaQpoFQEC2xawiNu2uPoIECBAgAABAgQIEBgGBisLWMStTCcjAQIECBAgQIAAAQIEti9w7Iu47YurkQABAgQIECBAgAABAtcQsIi7Bp6sxyyg7wQIECBAgAABAgR2I2ARtxt3tRIgcKwC+k2AAAECBAgQuKaARdw1AWUnQIAAAQLbEFAHAQIECBCYC1jEzSU8EyBAgAABAgQOT0CPCBA4QAGLuAMcVF0iQIAAAQIECBAgcD0BuacsYBE35dHRNgIECBAgQIAAAQIECJwSmPQi7lRb7RIgQIAAAQIECBAgQODoBSzijv4UOEgAnSJAgAABAgQIECBwsAIWcQc7tDpGgMDVBeQgQIAAAQIECExfwCJu+mOkhQQIECAwdQHtI0CAAAECWxSwiNsitqoIEDg8gY997GPDa1/72uGZz3zmrHM9t1/8LMIDAQJrE2heNb+aZxXac/vFt7+PQZsJECCwioBF3Cpq8hAgcPQCX/jCF4YXv/jFw9e+9rXhXe961/C9731vuHnz5uy5/eI7XrqjxwJA4JoCzaPmU/Oq+WW+XRNU9kMQ0IcjF/i9I++/7hMgQODKAp/97GeHN7/5zcOHP/zh4cEHHxzuvvvu4VnPetasnJ7bL77jpSv97KAHAgSuLND8aR41n5pXza/mWQX13H7xHS9d6TsmECBA4JAFVl/EHbKKvhEgQOAcgW9/+9vDm970pqFPBrp5PCfZLLrjpSt9+WaRHggQWFqgedP8aR41ny7K2PHSlb58F6V1jAABAvsuYBG37yO4h+3XZAL7LHDfffcN999///CqV71qqW6UrvTlWyqDRAQIPCHQvGn+NI+eiLxgo3SlL98FyRwiQIDA3gtYxO39EOoAgaMR2HlHH3300eHLX/7y8J73vOdKbSl9+cp/pYwSEzhigeZL86b5cxWG0pev/FfJJy0BAgT2ScAibp9GS1sJENipwFe/+tXhda973UptKF/5V8os0zUFZN9HgeZL82aVtpev/KvklYcAAQL7IGARtw+jpI0ECExC4Mc//vFw6623rtSW8pV/pcwyEThCgeZL82aVrpev/KvkfVIeOwQIEJiogEXcRAdGswgQIECAAAECBPZTQKsJbFrAIm7TwsonQOBgBG655Zbh+9///kr9KV/5V8osE4EjFGi+NG9W6Xr5yr9KXnkIECCwQ4Glq7aIW5pKQgIEjl3g1a9+9fDFL35xJYbylX+lzDIROEKB5kvzZpWul6/8q+SVhwABAvsgYBG3D6O0zTaqiwCBcwVe8IIXDK95zWuGD33oQ+emOetA6ctX/rOOiyNA4KkCzZfmTfPnqUfPjyl9+cp/fipHCBAgsN8CFnH7PX5aT2AyAsfSkPe9733DvffeO3z9619fqsulK335lsogEQECTwg0b5o/zaMnIi/YKF3py3dBMocIECCw9wIWcXs/hDpAgMA2BV760pcODzzwwHDXXXcNDz300IVVd7x0pS/fhYmP96CeEzhXoHnT/GkeNZ/OTXhyoOOlK335TqL8I0CAwMEKWMQd7NDqGAECmxJ44xvfOHzmM58Z3v3udw/33HPPbDH385//fFZdz91MFt/x0pV+dtADAQJXFmj+NI+aT82r5lfzbBiGoef2i+946Up/5UpkIECAwJ4JWMTt2YBpLgEC0xDoHf8f/OAHwx133DF85CMfGW677bZhHMfZc/vFd7x002ixVhDYX4HmUfOpedX8Mt/2dywn0XKNIHAAAhZxBzCIukCAwO4E3vGOdwxf+tKXhl/84hezRvTcfvGzCA8ECKxNoHnV/GqeVWjP7RffvkCAAIFNCkypbIu4KY2GthAgQIAAAQIECBAgQOASAYu4S4CmdVhrCBAgQIAAAQIECBA4dgGLuGM/A/T/OAT0kgABAgQIECBA4GAELOIOZih1hACBdQjcd999sx8oGcfxys/VP45XzzeO41C95Z9a0B4CmxTovB/H1eZM7RrH1fJWb/kFAgQI7KuARdy+jpx2EyCwEYH+J8E3b94cVgk1aJV85ane8gsEDkRgqW503nf+rxKqYJV85ane8gsECBDYVwGLuH0dOe0mQIAAAQIECBycgA4RILCMgEXcMkrSECBAgAABAgQIECAwXYEja5lF3JENuO4SIECAAAECBAgQILDfAhZx6xs/JREgQIAAAQIECBAgQGDjAhZxGydWAYHLBBwnQIAAAQIECBAgsLyARdzyVlISIEBgWgJaQ4AAAQIECBylgEXcUQ67ThMgQIDAMQvoOwECBAjst4BF3H6Pn9YTIECAAAECBLYloB4CBCYiYBE3kYHQDAIECBAgQIAAAQKHKaBX6xawiFu3qPIIECBAgAABAgQIECCwQYGjWcRt0FDRBAgQIECAAAECBAgQ2JqARdzWqFW0pwKaTYAAAQIECBAgQGBSAhZxkxoOjSFA4HAE9IQAAQIECBAgsBkBi7jNuCqVAAECBAisJiAXAQIECBC4RMAi7hIghwkQIECAAAEC+yCgjQQIHI+ARdzxjLWeEiBAgAABAgQIEDgtYH8PBSzi9nDQNJkAAQIECBAgQIAAgeMVmMYi7nj99ZwAAQIECBAgQIAAAQJXErCIuxKXxFMT0B4CUxF45JFHhltuuWXoeSpt0g4ChyrQPDPfDnV09YsAgWUELOKWUZKGAIFDE1h7f972trcNd9xxx9Dz2gtXIAECTxJonplvTyKxQ4DAkQlYxB3ZgOsuAQLrF+iG8vbbbx8eeOCBoef211+LEqchoBW7Fmh+Nc/Mt12PhPoJENilgEXcLvXVTYDA3gt86lOfmn2F8pOf/OSsLz33Va/iZxEeCBBYm0DzqvnVPKvQntsvvv1JB40jQIDAGgUs4taIqSgCBI5LoJvHPhXoRnKx5+0X3/HFeNsECKwu0HxqXjW/Fktpv/iOL8bbJnAoAvpB4CwBi7izVMQRIEBgCYFuHLuB7Ktdi8nbL77ji/G2CRBYXaD51Lxqfi2W0n7xHV+Mt02AAIFDFlhiEXfI3dc3AgQIrCbQDWM3j29961vPLKD4jpfuzAQiCRBYWqB51HxqXp2VqfiOl+6s4+IIECBwaAIWcYc2olPqj7YQOFCB/v6mr2717v9FXex46Up/UTrHCBA4X6D50zxqPp2fahg6XrrSX5TOMQIECByCgEXcIYyiPhA4MIEpd6ebxN7t74ZxmXaWrvTlWya9NAQI/E6gedP8aR79Lvb8rdKVvnznp3KEAAEC+y9gEbf/Y6gHBAhsUaAbxG4U++rWMtWWrvTlWya9NNcSkPnABJo3zZ/m0TJdK13py7dMemkIECCwrwIWcfs6ctpNgMDWBbox7Caxv7+5SuWlL1/5r5JPWgLHLNB8ad40f67iUPrylX/5fFISIEBgvwQs4vZrvLSWAIEdCfR3Nn1Fq3f5V2lC+cpfOavkl4fAMQk0T5ovzZtV+l2+8lfOKvnlIbC0gIQEdiRgEbcjeNUSILA/At0M9q5+N4bXaXX5K6fyrlOOvAQOWaD50Txpvlynn+WvnMq7TjnyEiBAYBMC1y3TIu66gvITIHDwAt0IdkPYV7Su09nyV07lXacceQkcskDzo3nSfLlOP8tfOZV3nXLkJUCAwBQFLOKmOCpbaZNKCBBYRqAbwG4G+zubZdJflqZyKq9yL0vrOIFjE2heND+aJ+voe+VUXuWuozxlECBAYCoCFnFTGQntILAvAkfUzv6epq9i9W7+OrtdeZVb+essV1kE9lmg+dC8aH6ssx+VV7mVv85ylUWAAIFdCljE7VJf3QQITFagm77eve8GcBONrNzKr55NlD/FMrWJwHkCzYPmQ/PivDTXia/cyq+e65QjLwECBKYiYBE3lZHQDgIEJiXQDV83fn0VaxMNq9zKr55NlK9MAvsk0DxoPjQvzmj3taMqt/Kr59qFKYAAAQITELCIm8AgaAIBAtMS6Eavm77+nmaTLav86qm+TdajbAJTFuj8bx40HzbZzsqvnurbZD3KnpKAthA4XAGLuMMdWz0jQGAFgf5upq9c9a79CtmvnKV6qq96r5xZBgJ7LtB53/nfPNhGV6qn+qp3G/WpgwCBPRXYg2ZbxO3BIGkiAQLbE3jssceGbvS2V+Mwq696t1mnughMQaDz3nybwkhoAwEC+yZgETfNEdMqAgR2JPD+979/6CtX26y++qp3m3Wqi8AUBDrvO/+32Zbqq95t1qkuAgQIrFvAIm7dosojsFMBlRMgQIAAAQIECBy6gEXcoY+w/hEgQGAZL0TChwAAEABJREFUAWkIECBAgACBvRGwiNubodJQAgQIECAwPQEtIkCAAIHtC1jEbd9cjQQIECBAgACBYxfQfwIEriFgEXcNPFkJECBAgAABAgQIENimgLoSsIhLQSBAgAABAgQIECBAgMCeCFjErTBQshAgQIAAAQIECBAgQGBXAhZxu5JX7zEK6DMBAgQIECBAgACBawtYxF2bUAEECByCwAc/+MHhxo0bw69//euVuvPII48ML3/5y4ef/vSnK+UvU3XXhnEch3EcF9rTUYHA4QhMYb6l+Za3vGU218ZxHGpTcQIBAgT2QcAibh9GSRsJEJi8wO233z5861vfGp73vOet3NaPf/zjw+tf//rh5s2bw69+9atZOcXNNjwQWEXgQPOsY7499NBDM53m22OPPTZ84hOfGOZxswMeCBAgMGEBi7gJD46mESCwG4Fu5PpErE/GakHv0PeOffvFtz2Oj39a1nZpTn8SVxnj+Hia8pS30PbLXvay2bv/pSnvPLz3ve8dCu0/7WlPmy3o/v3f/33lTwcrRyAwdYHmQfOi+VFbtzXf7r777uHTn/50Vc7efKkN3/nOd2b7HoaBAQEC0xawiJv2+GgdAQITFPjJT34y+6Ts85///PC5z31uaAG32Mz277nnnqHj80/U3v72tz+R5OUvf/ns07ZuIp+IPGOjG8oXvvCFQwu6Mw6LInAUAtuYb30N+itf+crwkpe85ChMdZLABgUUvSUBi7gtQauGAIHDEegrjy2sXvGKVwy33XbbUzrWV7Ne+cpXDnfeeedsAXbvvfcO3SD+7Gc/m6Vd5kaxTyfK84EPfGCWxwOBYxXY9Hzrk7/nP//5w5/8yZ/M5uyxOus3AQL7JXB4i7j98tdaAgT2UOCyRVifoC12qxvEZzzjGU9EXZa/BVyf5P3Lv/zL7GteT2S0QeAIBS6bL9edb32Fub+La7F41113+fryEZ5jukxgHwUs4vZx1LR5IwIKPS6B/v7mxo0bS/2QwembxMukTt909sncL3/5y8uyzY63gHvHO94xfP/73x/68YZZpAcCey4w1fm2yNq8/dGPfjT7qvRivG0CBAhMUeD3ptgobSJAgMCmBfo6ZH9vNl+g9dx+8dX9zW9+c/jud787+18G9LXG4s4JT4nuk7fyP/zww7N39e+///7Z/y7guc997lPSLkbMF3Df+MY3fAK3CGN77wWaV82v5lmd6bn94ttvvmx7vvU1yvkPE9WG/r61N3au8wuzlSMQIEBgGwIWcdtQVgcBApMU6O/N+lnxcRyHFmrt19B+cORv/uZvhv7m7c///M+HN7zhDUUvHfoE7cEHH5zle/rTnz7Lt8z/KqCbyEcffXRoETiO4+wXLG+cfFrYpxizQjwcmMBxdaf5NaX51tcoG4FxfHyu9QMqy8zT8ggECBDYtYBF3K5HQP0ECOxMoHfcu3Hr72F6bn/emH56fB7/0Y9+dPZT5H1q0GKvRV7pSt//G65FW6Ht4jpWmvIXylPeQtsdK83pMK+zPPNQ+vKdTmufwL4JNDeaZ53bPbc/78P83C9+W/Otuuf11qa9mms1XiBA4KgFLOKOevh1ngABAgQIECBA4FgE9PNwBCziDmcs9YQAAQIECBAgQIAAgSMQ2PIi7ghEdZEAAQIECBAgQIAAAQIbFLCI2yCuotcooCgCBAgQIECAAAECBGYCFnEzBg8ECByqgH4RIECAAAECBA5NwCLu0EZUfwgQIEBgHQLKIECAAAECkxWwiJvs0GgYAQIECBAgsH8CWkyAAIHNC1jEbd5YDQQIECBAgAABAgQuFnCUwBUELOKugCUpAQIECBAgQIAAAQIEdi2wuIjbdVvUT4AAAQIECBAgQIAAAQKXCFjEXQLk8DIC0hAgQIAAAQIECBAgsC0Bi7htSauHAIGnCoghQIAAAQIECBC4soBF3JXJZCBAgACBXQuonwABAgQIHLOARdwxj76+EyBAgACB4xLQWwIECByEgEXcQQyjThAgQIAAAQIECGxOQMkEpiVgETet8dAaAgQIECBAgAABAgQORWBD/bCI2xCsYgkQIECAAAECBAgQILAJAYu4TahOq0ytIUCAAAECBAgQIEDggAQs4g5oMHWFwHoFlEaAAAECBAgQIDBFAYu4KY6KNhEgQGCfBbSdAAECBAgQ2KiARdxGeRVOgAABAgQILCsgHQECBAgsJ2ARt5yTVAQIECBAgAABAtMU0CoCRydgEXd0Q67DBAgQIECAAAECBAgMw/4aWMTt79hpOQECBAgQIECAAAECRyhgEbfjQVc9AQIECBAgQIAAAQIEriJgEXcVLWkJTEdASwgQIECAAAECBI5UwCLuSAdetwkQOFYB/SZAgAABAgT2XcAibt9HUPsJECBAgMA2BNRBgAABApMRsIibzFBoCAECBAgQIEDg8AT0iACB9QtYxK3fVIkECBAgQIAAAQIECFxPQO4LBCziLsBxiAABAgQIECBAgAABAlMTsIi7aEQcI0CAAAECBAgQIECAwMQELOImNiCacxgCekGAAAECBAgQIEBgUwIWcZuSVS4BAgSuLiAHAQIECBAgQOBSAYu4S4kkIECAAAECUxfQPgIECBA4JgGLuGMabX0lQIAAAQIECCwK2CZAYC8FLOL2ctg0mgABAgQIECBAgMDuBNS8WwGLuN36q50AAQIECBAgQIAAAQJXEtjjRdyV+ikxAQIECBAgQIAAAQIEDkLAIu4ghlEnriQgMQECBAgQIECAAIE9FrCI2+PB03QCBLYroDYCBAgQIECAwBQELOKmMAraQIAAAQKHLKBvBAgQIEBgrQIWcWvlVBgBAgQIECBAYF0CyiFAgMDZAhZxZ7uIJUCAAAECBAgQILCfAlp98AIWcQc/xDpIgAABAgQIECBAgMAhCWxqEXdIRvpCgAABAgQIECBAgACByQhYxE1mKDTkcQGPBAgQIECAAAECBAhcJGARd5GOYwQI7I+AlhIgQIAAAQIEjkTAIu5IBlo3CRAgQOBsAbEECBAgQGDfBCzi9m3EtJcAAQIECBCYgoA2ECBAYGcCFnE7o1cxAQIECBAgQIDA8QnoMYHrC1jEXd9QCQQIECBAgAABAgQIENiswELpFnELGDYJECBAgAABAgQIECAwdQGLuKmP0LTapzUECBAgQIAAAQIECOxYwCJuxwOgegLHIaCXBAgQIECAAAEC6xKwiFuXpHIIECBAYP0CSiRAgAABAgSeImAR9xQSEQQIECBAgMC+C2g/AQIEDlnAIu6QR1ffCBAgQIAAAQIEriIgLYG9ELCI24th0kgCBAgQIECAAAECBKYrsN2WWcRt11ttBAgQIECAAAECBAgQuJaARdy1+KaVWWsIECBAYHWBj33sY8NrX/va4ZnPfOYwjuPsuf3iVy9VTgIECBAgsH4Bi7j1myqRwL4JaC+Boxb4whe+MLz4xS8evva1rw3vete7hu9973vDzZs3Z8/tF9/x0h01lM4TIECAwGQEfm8yLdEQAgQIENgzgf1v7mc/+9nhzW9+8/DhD394ePDBB4e77757eNaznjXrWM/tF9/x0pV+dtADAQIECBDYoYBF3A7xVU2AAAECuxP49re/PbzpTW8a+oStxdpFLel46UpfvovSOraEgCQECBAgcC0Bi7hr8clMgAABAvsqcN999w3333//8KpXvWqpLpSu9OVbKoNEBAisXUCBBAg8LmAR97iDRwIECBA4IoFHH310+PKXvzy85z3vuVKvS1++8l8po8QECBAgsEuBg6vbIu7ghlSHCBAgQOAyga9+9avD6173usuSnXm8fOU/86BIAgQIECCwBQGLuC0gz6rwQIAAAQKTEfjxj3883HrrrSu1p3zlXymzTAQIECBAYA0CFnFrQFQEgU0KKJsAAQIECBAgQIDAooBF3KKGbQIECByOgJ5cIHDLLbcM3//+9y9Icf6h8pX//BSOECBAgACBzQpYxG3WV+kECBAgMEGBV7/61cMXv/jFlVpWvvKvlHkvMmkkAQIECExdwCJu6iOkfQQIECCwdoEXvOAFw2te85rhQx/60JXKLn35yn+ljBITOAYBfSRAYGsCFnFbo1YRAQIECExJ4H3ve99w7733Dl//+teXalbpSl++pTJIRIAAAQJLCUh0dQGLuKubyUGAAAECByDw0pe+dHjggQeGu+66a3jooYcu7FHHS1f68l2Y2EECBAgQILBhAYu4GbAHAgQIEDhGgTe+8Y3DZz7zmeHd7373cM8998wWcz//+c9nFD23eCu+46Ur/eygBwIECBAgsEMBi7gd4qv6AAR0gQCBvRfoE7Yf/OAHwx133DF85CMfGW677bZhHMfZc/vFd7x0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';" alt="Sơ đồ mô hình đào tạo CNTT" style="max-height: 480px; max-width: 100%; object-fit: contain; border-radius: 4px;" />
+      </div>
+
+      <div class="callout-box">
+        <span class="callout-icon">ℹ</span>
+        <span>Phân bổ thời lượng trên lớp: 30% Lý thuyết tương tác (Senior 1) — 20% Thực hành cơ bản (Junior 2) — 20% Thực hành tích hợp (Junior 3) — 30% Project thực tế (Senior 1 &amp; Junior 3).</span>
+      </div>
+    </div>
+
+    <div class="footer-bar">© 2026 By Rikkei Education - Rikkei Education - All rights reserved.</div>
+    <div class="slide-number-badge">4</div>
+  </div>
+
+  <!-- SLIDE 5: SECTION BREAK 2 -->
+  <div class="slide slide-break" id="slide-5">
+    <div class="break-bg-pattern"></div>
+    <div class="break-content">
+      <div class="break-number-circle">2</div>
+      <div class="break-title">Tiêu chuẩn đánh giá nhân sự</div>
+    </div>
+    <div class="footer-bar" style="color: rgba(255,255,255,0.7);">© 2026 By Rikkei Education - Rikkei Education - All rights reserved.</div>
+  </div>
+
+  
+  <!-- SLIDE LADDER: KHUNG RANK NHÓM CHUYÊN MÔN -->
+  <div class="slide" id="slide-ladder">
+    <div class="slide-top-bar"></div>
+    <div class="logo-container">
+      <div>
+        <div class="logo-text">RIKKEI EDUCATION</div>
+        <div class="logo-sub">where the dream begins</div>
+      </div>
+    </div>
+
+    <div class="content-container" style="padding: 30px 50px 20px;">
+      <div class="slide-header" style="margin-bottom: 12px;">
+        <div class="slide-title">
+          Khung rank nhóm chuyên môn
+        </div>
+        <div class="slide-subtitle">Mô hình bậc thang phát triển năng lực & hạn mức tải lớp đào tạo</div>
+      </div>
+
+      <!-- LADDER CONTENT -->
+      <div style="position: relative; height: 500px; display: flex; flex-direction: column; justify-content: space-between;">
+        
+        <!-- TOP MGMT BOX -->
+        <div class="ladder-mgmt-box">
+          <div class="ladder-mgmt-title">TRỤC QUẢN LÝ • CHỨC DANH, KHÔNG PHẢI RANK</div>
+          <div class="ladder-mgmt-list">
+            <div>• <strong>Trưởng phòng chuyên môn:</strong> từ Senior 1 trở lên</div>
+            <div>• <strong>Giám đốc Đào tạo (Rank 8 cũ):</strong> điều hành toàn khối</div>
+          </div>
+        </div>
+
+        <!-- STAIRCASE ROW -->
+        <div class="ladder-row">
+          
+          <!-- STEP 0: TALENT INTERN -->
+          <div class="ladder-step-col" style="margin-bottom: 0px;">
+            <div class="ladder-step-card" style="border: 2px dashed #94a3b8; background: #f8fafc;">
+              <div>
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span class="ladder-rank-badge" style="color:#64748b;">RANK 1 CŨ</span>
+                  <span class="ladder-plus-icon" style="background:#f1f5f9; color:#64748b;">+</span>
+                </div>
+                <div class="ladder-step-name" style="color:#334155;">Talent Intern</div>
+                <div class="ladder-step-sub">Thực tập sinh trợ giảng</div>
+              </div>
+              <div class="ladder-step-ftr">
+                <div class="ladder-step-load" style="color:#334155;">Đầu vào</div>
+                <div class="ladder-step-desc">Hỗ trợ theo phân công</div>
+              </div>
+            </div>
+            <!-- Arrow -->
+            <svg style="position:absolute; top:-32px; right:-18px; width:30px; height:42px; pointer-events:none; z-index:3;">
+              <path d="M 0 38 H 14 V 5 H 25" fill="none" stroke="#94a3b8" stroke-width="2" stroke-dasharray="3 3"/>
+              <polygon points="23,2 29,5 23,8" fill="#94a3b8"/>
+            </svg>
+          </div>
+
+          <!-- STEP 1: JUNIOR 1 -->
+          <div class="ladder-step-col" style="margin-bottom: 30px;">
+            <div class="ladder-step-card" style="border-top: 4px solid #10b981;">
+              <div>
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span class="ladder-rank-badge" style="color:#059669;">RANK 2 CŨ</span>
+                  <span class="ladder-plus-icon" style="background:#ecfdf5; color:#059669;">+</span>
+                </div>
+                <div class="ladder-step-name">Junior 1</div>
+                <div class="ladder-step-sub">Trợ giảng</div>
+              </div>
+              <div class="ladder-step-ftr">
+                <div class="ladder-step-load">4 lớp</div>
+                <div class="ladder-step-desc">Hỗ trợ lớp, không đứng lớp</div>
+              </div>
+            </div>
+            <!-- Arrow -->
+            <svg style="position:absolute; top:-32px; right:-18px; width:30px; height:42px; pointer-events:none; z-index:3;">
+              <path d="M 0 38 H 14 V 5 H 25" fill="none" stroke="#2563eb" stroke-width="2"/>
+              <polygon points="23,2 29,5 23,8" fill="#2563eb"/>
+            </svg>
+          </div>
+
+          <!-- STEP 2: JUNIOR 2 -->
+          <div class="ladder-step-col" style="margin-bottom: 62px;">
+            <div class="ladder-step-card" style="border-top: 4px solid #3b82f6;">
+              <div>
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span class="ladder-rank-badge" style="color:#2563eb;">RANK 3 CŨ</span>
+                  <span class="ladder-plus-icon" style="background:#eff6ff; color:#2563eb;">+</span>
+                </div>
+                <div class="ladder-step-name">Junior 2</div>
+                <div class="ladder-step-sub">Giảng viên tập sự</div>
+              </div>
+              <div class="ladder-step-ftr">
+                <div class="ladder-step-load">3 lớp</div>
+                <div class="ladder-step-desc">Đứng lớp thực hành cơ bản</div>
+              </div>
+            </div>
+            <!-- Arrow -->
+            <svg style="position:absolute; top:-32px; right:-18px; width:30px; height:42px; pointer-events:none; z-index:3;">
+              <path d="M 0 38 H 14 V 5 H 25" fill="none" stroke="#2563eb" stroke-width="2"/>
+              <polygon points="23,2 29,5 23,8" fill="#2563eb"/>
+            </svg>
+          </div>
+
+          <!-- STEP 3: JUNIOR 3 -->
+          <div class="ladder-step-col" style="margin-bottom: 95px;">
+            <div class="ladder-step-card" style="border-top: 4px solid #f59e0b;">
+              <div>
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span class="ladder-rank-badge" style="color:#d97706;">RANK 4 CŨ</span>
+                  <span class="ladder-plus-icon" style="background:#fffbeb; color:#d97706;">+</span>
+                </div>
+                <div class="ladder-step-name">Junior 3</div>
+                <div class="ladder-step-sub">Giảng viên thực hành</div>
+              </div>
+              <div class="ladder-step-ftr">
+                <div class="ladder-step-load">3 lớp</div>
+                <div class="ladder-step-desc">Thực hành tích hợp + mentor project</div>
+              </div>
+            </div>
+            <!-- Arrow -->
+            <svg style="position:absolute; top:-32px; right:-18px; width:30px; height:42px; pointer-events:none; z-index:3;">
+              <path d="M 0 38 H 14 V 5 H 25" fill="none" stroke="#2563eb" stroke-width="2"/>
+              <polygon points="23,2 29,5 23,8" fill="#2563eb"/>
+            </svg>
+          </div>
+
+          <!-- STEP 4: SENIOR 1 -->
+          <div class="ladder-step-col" style="margin-bottom: 130px;">
+            <div class="ladder-step-card" style="border-top: 4px solid #ef4444;">
+              <div>
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span class="ladder-rank-badge" style="color:#dc2626;">RANK 5 CŨ</span>
+                  <span class="ladder-plus-icon" style="background:#fef2f2; color:#dc2626;">+</span>
+                </div>
+                <div class="ladder-step-name">Senior 1</div>
+                <div class="ladder-step-sub">Giảng viên chính</div>
+              </div>
+              <div class="ladder-step-ftr">
+                <div class="ladder-step-load">Tối đa 3 lớp</div>
+                <div class="ladder-step-desc">Lý thuyết + project, kèm người</div>
+              </div>
+            </div>
+            <!-- Arrow -->
+            <svg style="position:absolute; top:-32px; right:-18px; width:30px; height:42px; pointer-events:none; z-index:3;">
+              <path d="M 0 38 H 14 V 5 H 25" fill="none" stroke="#2563eb" stroke-width="2"/>
+              <polygon points="23,2 29,5 23,8" fill="#2563eb"/>
+            </svg>
+          </div>
+
+          <!-- STEP 5: SENIOR 2 -->
+          <div class="ladder-step-col" style="margin-bottom: 165px;">
+            <div class="ladder-step-card" style="border-top: 4px solid #8b5cf6;">
+              <div>
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span class="ladder-rank-badge" style="color:#7c3aed;">RANK 6 CŨ</span>
+                  <span class="ladder-plus-icon" style="background:#f5f3ff; color:#7c3aed;">+</span>
+                </div>
+                <div class="ladder-step-name">Senior 2</div>
+                <div class="ladder-step-sub">Chuyên gia đào tạo</div>
+              </div>
+              <div class="ladder-step-ftr">
+                <div class="ladder-step-load">≥ 1 lớp</div>
+                <div class="ladder-step-desc">Dạy để bám thực tế</div>
+              </div>
+            </div>
+            <!-- Arrow -->
+            <svg style="position:absolute; top:-32px; right:-18px; width:30px; height:42px; pointer-events:none; z-index:3;">
+              <path d="M 0 38 H 14 V 5 H 25" fill="none" stroke="#2563eb" stroke-width="2"/>
+              <polygon points="23,2 29,5 23,8" fill="#2563eb"/>
+            </svg>
+          </div>
+
+          <!-- STEP 6: SENIOR 3 -->
+          <div class="ladder-step-col" style="margin-bottom: 200px;">
+            <div class="ladder-step-card" style="background: #0f172a; border: 1.5px solid #1e293b; color:#ffffff; box-shadow: 0 10px 25px rgba(15,23,42,0.35);">
+              <div>
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span class="ladder-rank-badge" style="color:#fbbf24;">RANK 7 CŨ</span>
+                  <span class="ladder-plus-icon" style="background:rgba(251,191,36,0.18); color:#fbbf24;">★</span>
+                </div>
+                <div class="ladder-step-name" style="color:#ffffff;">Senior 3</div>
+                <div class="ladder-step-sub" style="color:#94a3b8;">Giảng viên trưởng</div>
+              </div>
+              <div class="ladder-step-ftr" style="border-top: 1.5px solid #1e293b;">
+                <div class="ladder-step-load" style="color:#fbbf24;">Không cố định</div>
+                <div class="ladder-step-desc" style="color:#cbd5e1;">Chuyên đề trọng điểm</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+  
+  <!-- SLIDE 6: CONTENT 2.1 - JUNIOR 1 & JUNIOR 2 -->
+  <div class="slide" id="slide-6">
+    <div class="slide-top-bar"></div>
+    <div class="logo-container">
+      <div>
+        <div class="logo-text">RIKKEI EDUCATION</div>
+        <div class="logo-sub">where the dream begins</div>
+      </div>
+    </div>
+
+    <div class="content-container">
+      <div class="slide-header">
+        <div class="slide-title">
+          <span class="slide-title-num">1.</span> Tiêu chuẩn năng lực: Junior 1 &amp; Junior 2
+        </div>
+        <div class="slide-subtitle">Hai cấp bậc nền tảng đảm nhận trợ giảng và thực hành cơ bản</div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header card-header-slate">
+            <span>Junior 1 — Trợ giảng</span>
+          </div>
+          <div class="card-body">
+            <div class="section-label">1. Nhiệm vụ chính</div>
+            <ul class="bullet-list">
+              <li>Hỗ trợ học tập trên LMS (Video, Quiz, Thực hành cơ bản)</li>
+              <li>Hỗ trợ rèn luyện kỹ năng qua các bài tập chuyên sâu</li>
+              <li>Verify chấm bài tập, nhận xét và theo dõi quá trình rèn luyện của sinh viên</li>
+              <li>Chăm sóc sinh viên, hỗ trợ giải đáp khó khăn kịp thời</li>
+              <li>Phối hợp giảng viên trong triển khai đào tạo và các công việc được giao</li>
+            </ul>
+            <div class="section-label">2. Yêu cầu năng lực</div>
+            <ul class="bullet-list">
+              <li>Chuyên môn: Nắm vững kiến thức nền môn học, tự làm toàn bộ bài tập cơ bản, thành thạo công cụ môn học</li>
+              <li>Sư phạm: Giải thích rõ ràng, kiên nhẫn, biết gợi mở thay vì đưa đáp án, chấm theo rubric, trách nhiệm</li>
+              <li>Kinh nghiệm: 1 năm kinh nghiệm trong phát triển phần mềm</li>
+            </ul>
+            <div class="section-label">3. Khả năng đáp ứng: Đảm nhận tối đa 4 lớp</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header card-header-red">
+            <span>Junior 2 — Giảng viên thực hành cơ bản</span>
+          </div>
+          <div class="card-body">
+            <div class="section-label">1. Nhiệm vụ chính</div>
+            <ul class="bullet-list">
+              <li>Thực hiện các công việc của Junior 1 khi cần hỗ trợ</li>
+              <li>Chuẩn bị tiết dạy: Nghiên cứu giáo án, chạy thử bài, chuẩn bị môi trường, mã nguồn, dữ liệu mẫu</li>
+              <li>Đứng lớp Thực hành cơ bản: Demo live coding, hướng dẫn từng bước, hỗ trợ học viên, chốt kiến thức</li>
+              <li>Đánh giá buổi học: Kiểm tra sản phẩm, ghi nhận mức đạt, giao bài tập rèn luyện bổ sung</li>
+              <li>Đóng góp học liệu: Góp ý, sửa lỗi bài thực hành, soạn thêm bài tập rèn luyện</li>
+            </ul>
+            <div class="section-label">2. Yêu cầu năng lực</div>
+            <ul class="bullet-list">
+              <li>Chuyên môn: Thành thạo công cụ, tự viết lời giải chuẩn, xử lý nhanh các lỗi học viên hay gặp</li>
+              <li>Sư phạm: Live coding mạch lạc, nói và gõ đồng thời, chia nhỏ kỹ năng, quản lý lớp tốt</li>
+              <li>Kinh nghiệm: Tối thiểu 6 tháng ở Junior 1 hoặc từ 2 năm lập trình; dạy thử đạt yêu cầu</li>
+            </ul>
+            <div class="section-label">3. Khả năng đáp ứng: Đảm nhận tối đa 3 lớp</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout-box">
+        <span class="callout-icon">✔</span>
+        <span>Nguyên tắc kế thừa tích lũy: Giảng viên Junior 2 bao gồm toàn bộ năng lực và làm thay công việc của Trợ giảng Junior 1 khi cần hỗ trợ.</span>
+      </div>
+    </div>
+
+    <div class="footer-bar">© 2026 By Rikkei Education - Rikkei Education - All rights reserved.</div>
+    <div class="slide-number-badge">6</div>
+  </div>
+
+  <!-- SLIDE 7: CONTENT 2.2 - JUNIOR 3 & SENIOR 1 -->
+  <div class="slide" id="slide-7">
+    <div class="slide-top-bar"></div>
+    <div class="logo-container">
+      <div>
+        <div class="logo-text">RIKKEI EDUCATION</div>
+        <div class="logo-sub">where the dream begins</div>
+      </div>
+    </div>
+
+    <div class="content-container">
+      <div class="slide-header">
+        <div class="slide-title">
+          <span class="slide-title-num">2.</span> Tiêu chuẩn năng lực: Junior 3 &amp; Senior 1
+        </div>
+        <div class="slide-subtitle">Hai cấp bậc chủ chốt phụ trách thực hành tích hợp, đồ án và lý thuyết bản chất</div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header card-header-red">
+            <span>Junior 3 — Giảng viên thực hành &amp; Project</span>
+          </div>
+          <div class="card-body">
+            <div class="section-label">1. Nhiệm vụ chính</div>
+            <ul class="bullet-list">
+              <li>Kế thừa và thực hiện tốt công việc của Junior 2</li>
+              <li>Đứng lớp Thực hành tích hợp: Kết nối nhiều công nghệ để giải quyết bài toán thực tế</li>
+              <li>Triển khai và hướng dẫn Project: Git flow, chia task, code review, kiểm thử hệ thống</li>
+              <li>Nghiệm thu và đánh giá đồ án: Review pull request, tổ chức phản biện và chấm điểm sản phẩm</li>
+              <li>Đóng góp học liệu: Xây dựng bài toán tích hợp mới, mini-project mẫu sát thực tế</li>
+            </ul>
+            <div class="section-label">2. Yêu cầu năng lực</div>
+            <ul class="bullet-list">
+              <li>Chuyên môn: Làm chủ tech-stack khóa học, tư duy kiến trúc mức vừa, debug lỗi tích hợp phức tạp</li>
+              <li>Sư phạm: Gợi mở tư duy problem-solving thay vì sửa hộ code, feedback mang tính phát triển</li>
+              <li>Kinh nghiệm: Tối thiểu 6 tháng ở Junior 2 hoặc từ 3 năm kinh nghiệm lập trình thực chiến</li>
+            </ul>
+            <div class="section-label">3. Khả năng đáp ứng: Đảm nhận tối đa 3 lớp hoặc 2-3 nhóm đồ án</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header card-header-slate">
+            <span>Senior 1 — Giảng viên lý thuyết &amp; Mentor</span>
+          </div>
+          <div class="card-body">
+            <div class="section-label">1. Nhiệm vụ chính</div>
+            <ul class="bullet-list">
+              <li>Đứng lớp Lý thuyết tương tác: Bản chất công nghệ, phân tích bài toán, so sánh giải pháp</li>
+              <li>Đứng lớp thực hành chuyên sâu và định hướng kiến trúc đồ án tổng thể</li>
+              <li>Đào tạo nhân sự kế cận: Mentoring, dự giờ, đánh giá và đào tạo Junior 1, 2, 3</li>
+              <li>Kiểm soát chất lượng lớp học: Giám sát tiến độ, chuẩn đầu ra, xử lý sự cố chất lượng</li>
+              <li>Biên soạn học liệu trọng tâm: Slide bài giảng lý thuyết, giáo án tương tác</li>
+            </ul>
+            <div class="section-label">2. Yêu cầu năng lực</div>
+            <ul class="bullet-list">
+              <li>Chuyên môn: Chuyên sâu nền tảng, Design Patterns, Clean Architecture, CI/CD, tối ưu hiệu năng</li>
+              <li>Sư phạm: Truyền cảm hứng, đơn giản hóa khái niệm trừu tượng, coaching và đào tạo nhân sự</li>
+              <li>Kinh nghiệm: Tối thiểu 1 năm ở Junior 3 hoặc từ 4-5 năm (Senior Dev / Tech Lead)</li>
+            </ul>
+            <div class="section-label">3. Khả năng đáp ứng: Tối đa 3 lớp lý thuyết + mentor 2-3 nhân sự Junior</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout-box">
+        <span class="callout-icon">ℹ</span>
+        <span>Senior 1 đóng vai trò hạt nhân: Chịu trách nhiệm cho 60% thời lượng trên lớp (30% Lý thuyết tương tác + 30% Project thực tế).</span>
+      </div>
+    </div>
+
+    <div class="footer-bar">© 2026 By Rikkei Education - Rikkei Education - All rights reserved.</div>
+    <div class="slide-number-badge">7</div>
+  </div>
+
+  <!-- SLIDE 8: CONTENT 2.3 - SENIOR 2 & SENIOR 3 -->
+  <div class="slide" id="slide-8">
+    <div class="slide-top-bar"></div>
+    <div class="logo-container">
+      <div>
+        <div class="logo-text">RIKKEI EDUCATION</div>
+        <div class="logo-sub">where the dream begins</div>
+      </div>
+    </div>
+
+    <div class="content-container">
+      <div class="slide-header">
+        <div class="slide-title">
+          <span class="slide-title-num">3.</span> Tiêu chuẩn năng lực: Senior 2 &amp; Senior 3
+        </div>
+        <div class="slide-subtitle">Hai cấp bậc hoạch định chương trình và chiến lược học thuật cấp cao</div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header card-header-slate">
+            <span>Senior 2 — Chuyên gia đào tạo &amp; Phát triển chương trình</span>
+          </div>
+          <div class="card-body">
+            <div class="section-label">1. Nhiệm vụ chính</div>
+            <ul class="bullet-list">
+              <li>Nghiên cứu xu hướng công nghệ thị trường, thiết kế khung chương trình (curriculum) và chuẩn đầu ra</li>
+              <li>Chuẩn hóa học liệu toàn hệ thống: Ngân hàng đề thi, dự án mẫu, bộ rubric đánh giá đồng bộ</li>
+              <li>Đào tạo giảng viên (Train-the-Trainer): Chủ trì workshop phương pháp sư phạm cho Senior 1 và GV</li>
+              <li>Thẩm định và cải tiến liên tục dựa trên khảo sát và phản hồi doanh nghiệp tuyển dụng</li>
+            </ul>
+            <div class="section-label">2. Yêu cầu năng lực</div>
+            <ul class="bullet-list">
+              <li>Chuyên môn: Tầm nhìn kiến trúc hệ thống tổng thể (Solution Architecture), am hiểu tuyển dụng IT</li>
+              <li>Sư phạm: Thiết kế chương trình đào tạo hiện đại (Instructional Design), phân tích dữ liệu giáo dục</li>
+              <li>Kinh nghiệm: Tối thiểu 1 năm ở Senior 1 hoặc từ 6 năm kinh nghiệm trong ngành CNTT</li>
+            </ul>
+            <div class="section-label">3. Khả năng đáp ứng: Phụ trách 1-2 chương trình đào tạo trọng điểm</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header card-header-red">
+            <span>Senior 3 — Giảng viên trưởng &amp; Chuyên gia đầu ngành</span>
+          </div>
+          <div class="card-body">
+            <div class="section-label">1. Nhiệm vụ chính</div>
+            <ul class="bullet-list">
+              <li>Quản trị toàn diện chất lượng đào tạo, kiểm định quy trình và cam kết chuẩn đầu ra học viện</li>
+              <li>Định hình chiến lược học thuật, đề ra triết lý đào tạo và phương pháp giảng dạy tiên phong</li>
+              <li>Đại diện học thuật &amp; Thương hiệu: Tham gia hội thảo công nghệ, kết nối đối tác doanh nghiệp lớn</li>
+              <li>Xây dựng đội ngũ kế cận cấp cao: Quy hoạch và phát triển giảng viên nòng cốt</li>
+            </ul>
+            <div class="section-label">2. Yêu cầu năng lực</div>
+            <ul class="bullet-list">
+              <li>Chuyên môn: Chuyên gia có tầm ảnh hưởng lớn trên thị trường, trình độ Enterprise Architect / CTO</li>
+              <li>Sư phạm: Tư duy lãnh đạo học thuật, truyền cảm hứng diện rộng, thiết lập chuẩn mực quốc tế</li>
+              <li>Kinh nghiệm: Từ 8-10 năm trong ngành CNTT, từng giữ vị trí lãnh đạo công nghệ cấp cao</li>
+            </ul>
+            <div class="section-label">3. Khả năng đáp ứng: Lãnh đạo toàn bộ khối/chương trình đào tạo</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout-box">
+        <span class="callout-icon">ℹ</span>
+        <span>Phòng Đào tạo CNTT triển khai giảng dạy trên lớp chỉ cần tính đến cấp bậc Senior 1; Senior 2 và 3 giữ vai trò nghiên cứu chiến lược.</span>
+      </div>
+    </div>
+
+    <div class="footer-bar">© 2026 By Rikkei Education - Rikkei Education - All rights reserved.</div>
+    <div class="slide-number-badge">8</div>
+  </div>
+
+  <!-- SLIDE 9: CONTENT 2.4 - PHÂN LOẠI 10 NHÂN SỰ -->
+  <div class="slide" id="slide-9">
+    <div class="slide-top-bar"></div>
+    <div class="logo-container">
+      <div>
+        <div class="logo-text">RIKKEI EDUCATION</div>
+        <div class="logo-sub">where the dream begins</div>
+      </div>
+    </div>
+
+    <div class="content-container">
+      <div class="slide-header">
+        <div class="slide-title">
+          <span class="slide-title-num">4.</span> Xếp loại 10 nhân sự hiện tại theo 6 cấp bậc
+        </div>
+        <div class="slide-subtitle">Danh sách phân bổ danh nghĩa đội ngũ giảng viên và trợ giảng phòng CNTT</div>
+      </div>
+
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th style="width: 60px;">STT</th>
+            <th>Họ và Tên</th>
+            <th>Cấp bậc chuẩn hóa</th>
+            <th>Vị trí đảm nhiệm</th>
+            <th>Phân vai nhiệm vụ chính</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Hồ Xuân Hùng</td>
+            <td style="color: #B71C1C;">Senior 1</td>
+            <td>Trưởng phòng CNTT</td>
+            <td>Quản lý phòng + Giảng dạy lý thuyết &amp; đồ án</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Bùi Thanh Hải</td>
+            <td style="color: #B71C1C;">Senior 1</td>
+            <td>Giảng viên CNTT</td>
+            <td>Giảng dạy lý thuyết tương tác + Hướng dẫn Project</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Trịnh Quốc Hai</td>
+            <td style="color: #B71C1C;">Senior 1</td>
+            <td>Giảng viên CNTT</td>
+            <td>Giảng dạy lý thuyết tương tác + Hướng dẫn Project</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Nguyễn Quảng An</td>
+            <td style="color: #1565C0;">Junior 3</td>
+            <td>Giảng viên CNTT</td>
+            <td>Thực hành tích hợp + Project (đang dạy lý thuyết)</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Phạm Tuấn Bình</td>
+            <td style="color: #1565C0;">Junior 3</td>
+            <td>Giảng viên CNTT</td>
+            <td>Thực hành tích hợp + Project (đang dạy lý thuyết)</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>Lương Quốc Tuấn</td>
+            <td style="color: #1565C0;">Junior 3</td>
+            <td>Giảng viên CNTT</td>
+            <td>Thực hành tích hợp + Project (đang dạy lý thuyết)</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>Nguyễn Công Hưởng</td>
+            <td style="color: #2E7D32;">Junior 2</td>
+            <td>Giảng viên tập sự</td>
+            <td>Thực hành cơ bản (live coding) + Trợ giảng LMS</td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td>Lâm Tùng Dương</td>
+            <td style="color: #2E7D32;">Junior 2</td>
+            <td>Giảng viên tập sự</td>
+            <td>Thực hành cơ bản (live coding) + Trợ giảng LMS</td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td>Phạm Ngọc Kiên</td>
+            <td style="color: #455A64;">Junior 1</td>
+            <td>Trợ giảng CNTT</td>
+            <td>Vận hành LMS + Hỗ trợ bài tập rèn luyện kỹ năng</td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td>Lại Trung Lâm</td>
+            <td style="color: #455A64;">Junior 1</td>
+            <td>Trợ giảng CNTT</td>
+            <td>Vận hành LMS + Hỗ trợ bài tập rèn luyện kỹ năng</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout-box">
+        <span class="callout-icon">✔</span>
+        <span>Đặc điểm then chốt: Cả 10 nhân sự đều làm được công việc của Junior 1 (chấm bài, hỗ trợ LMS, rèn luyện kỹ năng).</span>
+      </div>
+    </div>
+
+    <div class="footer-bar">© 2026 By Rikkei Education - Rikkei Education - All rights reserved.</div>
+    <div class="slide-number-badge">9</div>
+  </div>
+
+  <!-- SLIDE 10: SECTION BREAK 3 -->
+  <div class="slide slide-break" id="slide-10">
+    <div class="break-bg-pattern"></div>
+    <div class="break-content">
+      <div class="break-number-circle">3</div>
+      <div class="break-title">Nhu cầu nhân sự &amp; Quyết định chiến lược</div>
+    </div>
+    <div class="footer-bar" style="color: rgba(255,255,255,0.7);">© 2026 By Rikkei Education - Rikkei Education - All rights reserved.</div>
+  </div>
+
+  <!-- SLIDE 11: CONTENT 3.1 - BÀI TOÁN TẢI CÓ AI AGENT -->
+  <div class="slide" id="slide-11">
+    <div class="slide-top-bar"></div>
+    <div class="logo-container">
+      <div>
+        <div class="logo-text">RIKKEI EDUCATION</div>
+        <div class="logo-sub">where the dream begins</div>
+      </div>
+    </div>
+
+    <div class="content-container">
+      <div class="slide-header">
+        <div class="slide-title">
+          <span class="slide-title-num">1.</span> Bài toán tải nhân sự quy mô 13 lớp (440 sinh viên)
+        </div>
+        <div class="slide-subtitle">Đột phá năng suất nhờ ứng dụng công cụ AI Agent vào giảng dạy và vận hành</div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header card-header-slate">
+            <span>Cách tính cơ học cũ (Thiếu trợ lực AI)</span>
+          </div>
+          <div class="card-body">
+            <ul class="bullet-list">
+              <li>Chia việc thành các silo tách rời, mỗi cấp bậc chỉ nhận 2-3 lớp dù thời lượng chỉ 20-30%</li>
+              <li>Senior 1 (13 / 2): cần 7 người</li>
+              <li>Junior 3 (13 / 3): cần 5 người</li>
+              <li>Junior 2 (13 / 3): cần 5 người</li>
+              <li>Junior 1 (13 / 4): cần 4 người</li>
+            </ul>
+            <div style="margin-top: 10px; padding: 10px; background: #FFEBEE; border-radius: 4px; color: #C62828; font-size: 11.5px;">
+              Hệ quả: Dẫn đến nhu cầu ảo lên tới 21 nhân sự, gây áp lực tuyển dụng ồ ạt và tăng vọt chi phí vận hành.
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header card-header-red">
+            <span>Định mức mới tối ưu (Có đòn bẩy AI Agent)</span>
+          </div>
+          <div class="card-body">
+            <ul class="bullet-list">
+              <li>AI Agent tự động hóa chấm bài, sinh test case, giải đáp thắc mắc cơ bản 24/7 và tổng hợp báo cáo</li>
+              <li>1 Giảng viên phụ trách chuẩn tương đương 3 lớp trọn vẹn (300% tải theo tỷ trọng module)</li>
+              <li>1 Trợ giảng phụ trách kiểm soát 4 lớp trên LMS</li>
+              <li>Senior 1 (60% thời lượng): Cần 2.6 người -> 3 nhân sự</li>
+              <li>Junior 3 (20% thời lượng): Cần 0.87 người -> 1-2 nhân sự</li>
+              <li>Junior 2 (20% thời lượng): Cần 0.87 người -> 1-2 nhân sự</li>
+              <li>Junior 1 (Trợ giảng LMS): Cần 3.25 người -> 2-3 trợ giảng</li>
+            </ul>
+            <div style="margin-top: 10px; padding: 10px; background: #E8F5E9; border-radius: 4px; color: #2E7D32; font-size: 11.5px;">
+              Kết luận: Tổng bộ máy tối ưu chỉ cần từ 8 đến 10 nhân sự là bao quát toàn bộ 13 lớp.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout-box">
+        <span class="callout-icon">💡</span>
+        <span>Phòng hiện có đúng 10 nhân sự. Nhờ mô hình kế thừa công việc, toàn bộ giảng viên đều hỗ trợ chấm bài nên không bị quá tải.</span>
+      </div>
+    </div>
+
+    <div class="footer-bar">© 2026 By Rikkei Education - Rikkei Education - All rights reserved.</div>
+    <div class="slide-number-badge">11</div>
+  </div>
+
+  <!-- SLIDE 12: CONTENT 3.2 - BẢNG CÂN ĐỐI NHÂN SỰ -->
+  <div class="slide" id="slide-12">
+    <div class="slide-top-bar"></div>
+    <div class="logo-container">
+      <div>
+        <div class="logo-text">RIKKEI EDUCATION</div>
+        <div class="logo-sub">where the dream begins</div>
+      </div>
+    </div>
+
+    <div class="content-container">
+      <div class="slide-header">
+        <div class="slide-title">
+          <span class="slide-title-num">2.</span> Bảng cân đối nhân sự: Chuẩn cần vs Thực tế
+        </div>
+        <div class="slide-subtitle">Phân tích thực trạng có tính đến yếu tố bố trí công việc vượt cấp của giảng viên</div>
+      </div>
+
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th style="width: 100px;">Cấp bậc</th>
+            <th style="width: 90px;">Chuẩn cần</th>
+            <th style="width: 130px;">Hiện có</th>
+            <th>Đánh giá hiện trạng</th>
+            <th>Quyết định hành động</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="color: #B71C1C;">Senior 1</td>
+            <td>3 người</td>
+            <td>3 (+ 3 vượt cấp)</td>
+            <td>Rất dồi dào (Bình, An, Tuấn đã giảng dạy lý thuyết thực tế)</td>
+            <td>Phát triển nội bộ: Đánh giá để chính thức công nhận và thăng hạng Senior 1 cho Bình, An, Tuấn</td>
+          </tr>
+          <tr>
+            <td style="color: #1565C0;">Junior 3</td>
+            <td>1 - 2 người</td>
+            <td>3 người</td>
+            <td>Trống nhân sự chuyên trách do cả 3 thầy đang làm việc của Senior 1</td>
+            <td>Phát triển nội bộ: Bồi dưỡng và đẩy 2 thầy Junior 2 (Hưởng, Dương) lên gánh thay mảng thực hành tích hợp</td>
+          </tr>
+          <tr>
+            <td style="color: #2E7D32;">Junior 2</td>
+            <td>1 - 2 người</td>
+            <td>2 người</td>
+            <td>Đủ cho lớp cơ bản, sẵn sàng chuyển giao lên cấp trên</td>
+            <td>Phát triển nội bộ: Đào tạo thực hành tích hợp để nâng hạng lên Junior 3; chuyển dần bài thực hành cơ bản cho Junior 1 tập dượt</td>
+          </tr>
+          <tr>
+            <td style="color: #455A64;">Junior 1</td>
+            <td>2 người</td>
+            <td>2 người</td>
+            <td>Đủ (nhờ AI tối ưu khâu LMS và chấm bài tự động)</td>
+            <td>Duy trì, không tuyển dụng thêm; bồi dưỡng kỹ năng live coding để sẵn sàng tiếp quản vị trí Junior 2</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout-box">
+        <span class="callout-icon">✔</span>
+        <span>Thực tế 3 thầy An, Bình, Tuấn đã đứng lớp lý thuyết thành công, giúp tải lý thuyết 13 lớp được chia đều cho 6 người (chỉ ~2 lớp/người).</span>
+      </div>
+    </div>
+
+    <div class="footer-bar">© 2026 By Rikkei Education - Rikkei Education - All rights reserved.</div>
+    <div class="slide-number-badge">12</div>
+  </div>
+
+  <!-- SLIDE 13: CONTENT 3.3 - QUYẾT ĐỊNH CHIẾN LƯỢC -->
+  <div class="slide" id="slide-13">
+    <div class="slide-top-bar"></div>
+    <div class="logo-container">
+      <div>
+        <div class="logo-text">RIKKEI EDUCATION</div>
+        <div class="logo-sub">where the dream begins</div>
+      </div>
+    </div>
+
+    <div class="content-container">
+      <div class="slide-header">
+        <div class="slide-title">
+          <span class="slide-title-num">3.</span> Quyết định chiến lược: Tuyển dụng - Phát triển - Tinh giảm
+        </div>
+        <div class="slide-subtitle">Bộ ba quyết sách tối ưu hóa nguồn lực nhân sự phòng đào tạo CNTT</div>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-header card-header-slate">
+            <span>1. Tuyển dụng: ĐÓNG BĂNG 100%</span>
+          </div>
+          <div class="card-body">
+            <div style="font-size: 13px; color: #B71C1C; margin-bottom: 6px;">Không tuyển thêm nhân sự ngoài</div>
+            <ul class="bullet-list">
+              <li>Bộ khung 10 nhân sự hiện tại đã đáp ứng hoàn hảo quy mô 13 lớp (440 học viên)</li>
+              <li>AI Agent đã giải phóng tối đa công việc chấm bài, soạn giáo án và trả lời học viên</li>
+              <li>Toàn bộ giảng viên các cấp đều có thể làm công việc trợ giảng khi cần thiết</li>
+              <li>Tiết kiệm tối đa ngân sách tuyển dụng và chi phí onboarding nhân sự mới</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header card-header-red">
+            <span>2. Phát triển nội bộ: TRỌNG TÂM</span>
+          </div>
+          <div class="card-body">
+            <div style="font-size: 13px; color: #B71C1C; margin-bottom: 6px;">Chuẩn hóa và đôn cấp kế cận</div>
+            <ul class="bullet-list">
+              <li>Chính thức hóa chức danh Senior 1 cho 3 thầy đang dạy vượt cấp (An, Bình, Tuấn)</li>
+              <li>Đào tạo thực hành tích hợp và đồ án để đưa Hưởng, Dương từ Junior 2 lên Junior 3</li>
+              <li>Bồi dưỡng kỹ năng live coding và quản lý lớp để đưa Kiên, Lâm từ Junior 1 lên Junior 2</li>
+              <li>Tạo lộ trình thăng tiến rõ ràng, giữ chân nhân tài cốt cán</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header card-header-teal">
+            <span>3. Tinh giảm: SÀNG LỌC KPI</span>
+          </div>
+          <div class="card-body">
+            <div style="font-size: 13px; color: #00695C; margin-bottom: 6px;">Tối ưu hóa năng suất đa nhiệm</div>
+            <ul class="bullet-list">
+              <li>Áp dụng định mức năng lực mới: Mỗi giảng viên bắt buộc gánh tối thiểu 3 lớp theo tỷ trọng module</li>
+              <li>Đo lường năng lực ứng dụng AI Agent vào giảng dạy và tỷ lệ sinh viên đạt chuẩn đầu ra</li>
+              <li>Không tinh giảm cơ học, nhưng sẽ sàng lọc những nhân sự không đạt chuẩn rubric sau thời gian đào tạo</li>
+              <li>Dành quỹ thưởng hiệu suất cho các nhân sự gánh tải vượt mức</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout-box">
+        <span class="callout-icon">💡</span>
+        <span>Chiến lược cốt lõi: Tập trung phát triển năng lực nội bộ và tối ưu hóa quy trình cùng AI thay vì phình to bộ máy.</span>
+      </div>
+    </div>
+
+    <div class="footer-bar">© 2026 By Rikkei Education - Rikkei Education - All rights reserved.</div>
+    <div class="slide-number-badge">13</div>
+  </div>
+
+  <!-- SLIDE 14: SECTION BREAK 4 -->
+  <div class="slide slide-break" id="slide-14">
+    <div class="break-bg-pattern"></div>
+    <div class="break-content">
+      <div class="break-number-circle">4</div>
+      <div class="break-title">Lộ trình phát triển nhân sự</div>
+    </div>
+    <div class="footer-bar" style="color: rgba(255,255,255,0.7);">© 2026 By Rikkei Education - Rikkei Education - All rights reserved.</div>
+  </div>
+
+  <!-- SLIDE 15: CONTENT 4.1 - LƯU ĐỒ J1 -> J2 -->
+  <div class="slide" id="slide-15">
+    <div class="slide-top-bar"></div>
+    <div class="logo-container">
+      <div>
+        <div class="logo-text">RIKKEI EDUCATION</div>
+        <div class="logo-sub">where the dream begins</div>
+      </div>
+    </div>
+
+    <div class="content-container">
+      <div class="slide-header">
+        <div class="slide-title">
+          <span class="slide-title-num">1.</span> Lộ trình phát triển: Junior 1 lên Junior 2
+        </div>
+        <div class="slide-subtitle">Chuyển giao từ Trợ giảng lên Giảng viên thực hành cơ bản (Thời gian: 6 tháng)</div>
+      </div>
+
+      <div class="flowchart-container">
+        <div class="flow-step">
+          <div class="flow-step-aside red-theme">
+            <div>GĐ 1: Tháng 1 - 2</div>
+            <div style="font-size: 10.5px; opacity: 0.85;">Nền tảng chuyên môn</div>
+          </div>
+          <div class="flow-step-main">
+            <div>1. Lời giải mẫu toàn bộ bài thực hành cơ bản của môn học</div>
+            <div>2. Danh mục các lỗi thường gặp của sinh viên và giải pháp xử lý nhanh</div>
+            <div>3. Hoàn thành khóa đào tạo phương pháp dạy thực hành</div>
+          </div>
+        </div>
+
+        <div class="flow-arrow">▼</div>
+
+        <div class="flow-step">
+          <div class="flow-step-aside red-theme">
+            <div>GĐ 2: Tháng 3 - 4</div>
+            <div style="font-size: 10.5px; opacity: 0.85;">Quan sát &amp; Đồng giảng</div>
+          </div>
+          <div class="flow-step-main">
+            <div>1. Dự giờ tối thiểu 8 tiết Thực hành cơ bản của Junior 2, Junior 3 có báo cáo nghiệm thu</div>
+            <div>2. Đồng giảng tối thiểu 4 buổi: Demo live coding 15-20 phút hoặc chốt kiến thức cuối buổi</div>
+            <div>3. Nộp 2 video luyện demo và kế hoạch bài dạy chi tiết cho 2-3 tiết học</div>
+          </div>
+        </div>
+
+        <div class="flow-arrow">▼</div>
+
+        <div class="flow-step">
+          <div class="flow-step-aside red-theme">
+            <div>GĐ 3: Tháng 5</div>
+            <div style="font-size: 10.5px; opacity: 0.85;">Đứng lớp có giám sát</div>
+          </div>
+          <div class="flow-step-main">
+            <div>1. Đứng lớp trọn buổi 3-4 lần, mentor (Junior 2, Junior 3) trực tiếp dự giờ và đánh giá</div>
+            <div>2. Rút kinh nghiệm chuyên môn 30 phút ngay sau mỗi buổi dạy</div>
+            <div>3. Soạn 1 bài tập rèn luyện kỹ năng mới đưa vào hệ thống LMS</div>
+          </div>
+        </div>
+
+        <div class="flow-arrow">▼</div>
+
+        <div class="flow-step">
+          <div class="flow-step-aside red-theme">
+            <div>GĐ 4: Tháng 6</div>
+            <div style="font-size: 10.5px; opacity: 0.85;">Dạy thử &amp; Đánh giá</div>
+          </div>
+          <div class="flow-step-main">
+            <div>1. Dạy thử 1 tiết thực hành cơ bản trước Hội đồng chuyên môn đạt điểm tối thiểu 80/100</div>
+            <div>2. Chính thức công nhận và bổ nhiệm vị trí Giảng viên thực hành cơ bản Junior 2</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout-box">
+        <span class="callout-icon">ℹ</span>
+        <span>Áp dụng trực tiếp cho: Phạm Ngọc Kiên và Lại Trung Lâm.</span>
+      </div>
+    </div>
+
+    <div class="footer-bar">© 2026 By Rikkei Education - Rikkei Education - All rights reserved.</div>
+    <div class="slide-number-badge">15</div>
+  </div>
+
+  <!-- SLIDE 16: CONTENT 4.2 - LƯU ĐỒ J2 -> J3 -->
+  <div class="slide" id="slide-16">
+    <div class="slide-top-bar"></div>
+    <div class="logo-container">
+      <div>
+        <div class="logo-text">RIKKEI EDUCATION</div>
+        <div class="logo-sub">where the dream begins</div>
+      </div>
+    </div>
+
+    <div class="content-container">
+      <div class="slide-header">
+        <div class="slide-title">
+          <span class="slide-title-num">2.</span> Lộ trình phát triển: Junior 2 lên Junior 3
+        </div>
+        <div class="slide-subtitle">Chuyển giao từ Thực hành cơ bản lên Thực hành tích hợp &amp; Project (Thời gian: 6 tháng)</div>
+      </div>
+
+      <div class="flowchart-container">
+        <div class="flow-step">
+          <div class="flow-step-aside">
+            <div>GĐ 1: Tháng 1 - 2</div>
+            <div style="font-size: 10.5px; opacity: 0.85;">Tích hợp &amp; Đồ án</div>
+          </div>
+          <div class="flow-step-main">
+            <div>1. Lời giải mẫu 2 bài toán tích hợp liên module và 1 mini-project hoàn chỉnh</div>
+            <div>2. Xây dựng tài liệu chuẩn quy trình Git flow, code review và xử lý conflict code</div>
+            <div>3. Tham gia khóa bồi dưỡng kỹ năng hướng dẫn đồ án và tư duy phân tích hệ thống</div>
+          </div>
+        </div>
+
+        <div class="flow-arrow">▼</div>
+
+        <div class="flow-step">
+          <div class="flow-step-aside">
+            <div>GĐ 2: Tháng 3 - 4</div>
+            <div style="font-size: 10.5px; opacity: 0.85;">Quan sát &amp; Đồng hành</div>
+          </div>
+          <div class="flow-step-main">
+            <div>1. Dự giờ tối thiểu 6 buổi Thực hành tích hợp của Junior 3 và Senior 1</div>
+            <div>2. Đồng hướng dẫn (Co-mentor) tối thiểu 2 nhóm sinh viên làm project thực tế</div>
+            <div>3. Xây dựng 1 bộ tiêu chí đánh giá (rubric) chi tiết cho sản phẩm project mẫu</div>
+          </div>
+        </div>
+
+        <div class="flow-arrow">▼</div>
+
+        <div class="flow-step">
+          <div class="flow-step-aside">
+            <div>GĐ 3: Tháng 5</div>
+            <div style="font-size: 10.5px; opacity: 0.85;">Đứng lớp có bảo trợ</div>
+          </div>
+          <div class="flow-step-main">
+            <div>1. Đứng lớp độc lập trọn vẹn 2-3 buổi Thực hành tích hợp có mentor dự giờ</div>
+            <div>2. Chủ trì 2 buổi demo phản biện đồ án nội bộ và cho điểm đánh giá sinh viên</div>
+            <div>3. Đóng góp 1 bài toán tích hợp thực tế mới vào ngân hàng học liệu môn học</div>
+          </div>
+        </div>
+
+        <div class="flow-arrow">▼</div>
+
+        <div class="flow-step">
+          <div class="flow-step-aside">
+            <div>GĐ 4: Tháng 6</div>
+            <div style="font-size: 10.5px; opacity: 0.85;">Thẩm định &amp; Nghiệm thu</div>
+          </div>
+          <div class="flow-step-main">
+            <div>1. Nghiệm thu kết quả đồ án các nhóm sinh viên phụ trách đạt tỷ lệ pass tối thiểu 85%</div>
+            <div>2. Dạy thử 1 buổi Thực hành tích hợp trước Hội đồng chuyên môn đạt tối thiểu 80/100</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout-box">
+        <span class="callout-icon">ℹ</span>
+        <span>Áp dụng trực tiếp cho: Nguyễn Công Hưởng và Lâm Tùng Dương.</span>
+      </div>
+    </div>
+
+    <div class="footer-bar">© 2026 By Rikkei Education - Rikkei Education - All rights reserved.</div>
+    <div class="slide-number-badge">16</div>
+  </div>
+
+  <!-- SLIDE 17: CONTENT 4.3 - LƯU ĐỒ J3 -> S1 -->
+  <div class="slide" id="slide-17">
+    <div class="slide-top-bar"></div>
+    <div class="logo-container">
+      <div>
+        <div class="logo-text">RIKKEI EDUCATION</div>
+        <div class="logo-sub">where the dream begins</div>
+      </div>
+    </div>
+
+    <div class="content-container">
+      <div class="slide-header">
+        <div class="slide-title">
+          <span class="slide-title-num">3.</span> Lộ trình phát triển: Junior 3 lên Senior 1
+        </div>
+        <div class="slide-subtitle">Chuẩn hóa và công nhận Giảng viên lý thuyết tương tác &amp; Mentor (Thời gian: 6 tháng)</div>
+      </div>
+
+      <div class="flowchart-container">
+        <div class="flow-step">
+          <div class="flow-step-aside red-theme">
+            <div>GĐ 1: Tháng 1 - 2</div>
+            <div style="font-size: 10.5px; opacity: 0.85;">Bản chất &amp; Sư phạm lý thuyết</div>
+          </div>
+          <div class="flow-step-main">
+            <div>1. Hoàn thiện bộ slide bài giảng tương tác chuẩn cho 2 chuyên đề lý thuyết nền tảng</div>
+            <div>2. Khóa đào tạo phương pháp giảng lý thuyết tích cực và kỹ thuật dẫn dắt phản biện</div>
+            <div>3. Chuẩn hóa giáo án và ngân hàng câu hỏi tình huống thực tế doanh nghiệp</div>
+          </div>
+        </div>
+
+        <div class="flow-arrow">▼</div>
+
+        <div class="flow-step">
+          <div class="flow-step-aside red-theme">
+            <div>GĐ 2: Tháng 3 - 4</div>
+            <div style="font-size: 10.5px; opacity: 0.85;">Đồng giảng &amp; Kèm cặp</div>
+          </div>
+          <div class="flow-step-main">
+            <div>1. Đồng giảng tối thiểu 4 buổi Lý thuyết tương tác cùng Senior 1 (mở bài hoặc case study)</div>
+            <div>2. Kèm cặp trực tiếp 1 trợ giảng Junior 1: Dự giờ, góp ý phương pháp và đánh giá tiến độ</div>
+            <div>3. Chủ trì 1 buổi seminar chuyên môn nội bộ về công nghệ mới hoặc ứng dụng AI</div>
+          </div>
+        </div>
+
+        <div class="flow-arrow">▼</div>
+
+        <div class="flow-step">
+          <div class="flow-step-aside red-theme">
+            <div>GĐ 3: Tháng 5</div>
+            <div style="font-size: 10.5px; opacity: 0.85;">Đứng lớp độc lập</div>
+          </div>
+          <div class="flow-step-main">
+            <div>1. Đứng lớp lý thuyết độc lập 1 môn học, sinh viên khảo sát hài lòng đạt tối thiểu 85/100</div>
+            <div>2. Senior 1 dự giờ ngẫu nhiên 2 buổi, lập biên bản đánh giá kiểm soát lớp học</div>
+            <div>3. Biên soạn 1 đề thi hoặc 1 case study doanh nghiệp chuẩn hóa đưa vào LMS</div>
+          </div>
+        </div>
+
+        <div class="flow-arrow">▼</div>
+
+        <div class="flow-step">
+          <div class="flow-step-aside red-theme">
+            <div>GĐ 4: Tháng 6</div>
+            <div style="font-size: 10.5px; opacity: 0.85;">Thẩm định &amp; Bổ nhiệm</div>
+          </div>
+          <div class="flow-step-main">
+            <div>1. Giảng thử 1 tiết lý thuyết tương tác trước Hội đồng chuyên môn đạt tối thiểu 85/100</div>
+            <div>2. Nghiệm thu hồ sơ: Kết quả dạy thực tế + kết quả đồ án + năng lực kèm cặp nhân sự</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout-box">
+        <span class="callout-icon">✔</span>
+        <span>Áp dụng chuẩn hóa cho: Nguyễn Quảng An, Phạm Tuấn Bình, Lương Quốc Tuấn (đã dạy lý thuyết thực tế).</span>
+      </div>
+    </div>
+
+    <div class="footer-bar">© 2026 By Rikkei Education - Rikkei Education - All rights reserved.</div>
+    <div class="slide-number-badge">17</div>
+  </div>
+
+  <!-- SLIDE 18: CONTENT 4.4 - LƯU ĐỒ S1 -> S2 -->
+  <div class="slide" id="slide-18">
+    <div class="slide-top-bar"></div>
+    <div class="logo-container">
+      <div>
+        <div class="logo-text">RIKKEI EDUCATION</div>
+        <div class="logo-sub">where the dream begins</div>
+      </div>
+    </div>
+
+    <div class="content-container">
+      <div class="slide-header">
+        <div class="slide-title">
+          <span class="slide-title-num">4.</span> Lộ trình phát triển: Senior 1 lên Senior 2
+        </div>
+        <div class="slide-subtitle">Chuyển giao lên Chuyên gia đào tạo &amp; Xây dựng chương trình (Thời gian: 6 tháng)</div>
+      </div>
+
+      <div class="flowchart-container">
+        <div class="flow-step">
+          <div class="flow-step-aside">
+            <div>GĐ 1: Tháng 1 - 2</div>
+            <div style="font-size: 10.5px; opacity: 0.85;">Nghiên cứu chương trình</div>
+          </div>
+          <div class="flow-step-main">
+            <div>1. Báo cáo khảo sát nhu cầu công nghệ của tối thiểu 5 doanh nghiệp phần mềm đối tác</div>
+            <div>2. Hoàn thành khóa đào tạo Thiết kế chương trình đào tạo hiện đại (Instructional Design)</div>
+            <div>3. Bản đề xuất nâng cấp hoặc phát triển mới 1 module môn học trọng điểm</div>
+          </div>
+        </div>
+
+        <div class="flow-arrow">▼</div>
+
+        <div class="flow-step">
+          <div class="flow-step-aside">
+            <div>GĐ 2: Tháng 3 - 4</div>
+            <div style="font-size: 10.5px; opacity: 0.85;">Thiết kế &amp; Thẩm định</div>
+          </div>
+          <div class="flow-step-main">
+            <div>1. Khung chương trình đào tạo chuẩn (Syllabus, Learning Outcomes, Lộ trình chi tiết)</div>
+            <div>2. Ngân hàng bài tập lớn, dự án thực tế mẫu và bộ rubric kiểm định đầu ra tương ứng</div>
+            <div>3. Thẩm định nội bộ chương trình với sự tham gia của Senior 1 và đại diện doanh nghiệp</div>
+          </div>
+        </div>
+
+        <div class="flow-arrow">▼</div>
+
+        <div class="flow-step">
+          <div class="flow-step-aside">
+            <div>GĐ 3: Tháng 5</div>
+            <div style="font-size: 10.5px; opacity: 0.85;">Thí điểm &amp; Đào tạo ToT</div>
+          </div>
+          <div class="flow-step-main">
+            <div>1. Tổ chức 2 buổi workshop Train-the-Trainer chuyển giao cho giảng viên đứng lớp</div>
+            <div>2. Giám sát lớp học thí điểm đầu tiên và thu thập dữ liệu đo lường hiệu quả học tập</div>
+            <div>3. Hoàn thiện bộ đóng gói học liệu hoàn chỉnh sau phản hồi thực tế</div>
+          </div>
+        </div>
+
+        <div class="flow-arrow">▼</div>
+
+        <div class="flow-step">
+          <div class="flow-step-aside">
+            <div>GĐ 4: Tháng 6</div>
+            <div style="font-size: 10.5px; opacity: 0.85;">Nghiệm thu Học viện</div>
+          </div>
+          <div class="flow-step-main">
+            <div>1. Báo cáo nghiệm thu kết quả lớp học thí điểm trước Hội đồng học thuật</div>
+            <div>2. Trình duyệt toàn bộ chương trình và học liệu áp dụng chính thức trên toàn hệ thống</div>
+            <div>3. Hội đồng học thuật ra quyết định công nhận vị trí Senior 2 - Chuyên gia chương trình</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout-box">
+        <span class="callout-icon">ℹ</span>
+        <span>Quy hoạch nguồn: Bùi Thanh Hải, Trịnh Quốc Hai hoặc Hồ Xuân Hùng trong giai đoạn 2 (tháng 7-12).</span>
+      </div>
+    </div>
+
+    <div class="footer-bar">© 2026 By Rikkei Education - Rikkei Education - All rights reserved.</div>
+    <div class="slide-number-badge">18</div>
+  </div>
+
+  <!-- SLIDE 19: SECTION BREAK 5 -->
+  <div class="slide slide-break" id="slide-19">
+    <div class="break-bg-pattern"></div>
+    <div class="break-content">
+      <div class="break-number-circle">5</div>
+      <div class="break-title">Kế hoạch phát triển nội bộ trong 6 - 12 tháng</div>
+    </div>
+    <div class="footer-bar" style="color: rgba(255,255,255,0.7);">© 2026 By Rikkei Education - Rikkei Education - All rights reserved.</div>
+  </div>
+
+  <!-- SLIDE 20: CONTENT 5.1 - KẾ HOẠCH 2 GIAI ĐOẠN -->
+  <div class="slide" id="slide-20">
+    <div class="slide-top-bar"></div>
+    <div class="logo-container">
+      <div>
+        <div class="logo-text">RIKKEI EDUCATION</div>
+        <div class="logo-sub">where the dream begins</div>
+      </div>
+    </div>
+
+    <div class="content-container">
+      <div class="slide-header">
+        <div class="slide-title">
+          <span class="slide-title-num">1.</span> Kế hoạch triển khai: Giai đoạn 6 tháng &amp; 12 tháng
+        </div>
+        <div class="slide-subtitle">Lộ trình thực hiện đồng bộ giữa đào tạo bồi dưỡng, thẩm định và vận hành bộ máy</div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header card-header-red">
+            <span>Giai đoạn 1: Tháng 1 - Tháng 6 (Bồi dưỡng &amp; Thẩm định đợt 1)</span>
+          </div>
+          <div class="card-body">
+            <ul class="bullet-list">
+              <li>Nhóm An, Bình, Tuấn: Chuẩn hóa giáo án lý thuyết, xây dựng case study doanh nghiệp, bảo vệ trước Hội đồng để chính thức bổ nhiệm Senior 1 vào tháng 6</li>
+              <li>Nhóm Hưởng, Dương: Co-mentor đồ án, làm chủ thực hành tích hợp, thi dạy thử lên Junior 3 vào tháng 6</li>
+              <li>Nhóm Kiên, Lâm: Luyện demo live coding, đứng lớp có mentor dự giờ, thi dạy thử lên Giảng viên Junior 2 vào tháng 6</li>
+              <li>Ban cố vấn (Hùng, Hải, Hai): Giám sát tiến độ, dự giờ chéo và trực tiếp thẩm định chuyên môn</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header card-header-slate">
+            <span>Giai đoạn 2: Tháng 7 - Tháng 12 (Vận hành &amp; Đánh giá KPI)</span>
+          </div>
+          <div class="card-body">
+            <ul class="bullet-list">
+              <li>An, Bình, Tuấn (Senior 1 mới): Độc lập chủ trì các lớp lý thuyết và định hướng đồ án cho các khóa mới</li>
+              <li>Hưởng, Dương (Junior 3 mới): Độc lập đứng toàn bộ các lớp thực hành tích hợp và nghiệm thu đồ án</li>
+              <li>Kiên, Lâm (Junior 2 mới): Độc lập đứng lớp thực hành cơ bản, quản lý vận hành AI Agent trên LMS</li>
+              <li>Tháng 12: Đánh giá KPI toàn bộ nhân sự theo định mức 3 lớp/GV; quy hoạch nhân sự Senior 1 lên Senior 2</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout-box">
+        <span class="callout-icon">✔</span>
+        <span>Cam kết: Đảm bảo chuyển giao nhịp nhàng, liên tục, không làm gián đoạn lịch học của 440 sinh viên hiện tại.</span>
+      </div>
+    </div>
+
+    <div class="footer-bar">© 2026 By Rikkei Education - Rikkei Education - All rights reserved.</div>
+    <div class="slide-number-badge">20</div>
+  </div>
+
+  <!-- SLIDE 21: CONTENT 5.2 - BẢNG PHÂN CÔNG MENTOR - MENTEE -->
+  <div class="slide" id="slide-21">
+    <div class="slide-top-bar"></div>
+    <div class="logo-container">
+      <div>
+        <div class="logo-text">RIKKEI EDUCATION</div>
+        <div class="logo-sub">where the dream begins</div>
+      </div>
+    </div>
+
+    <div class="content-container">
+      <div class="slide-header">
+        <div class="slide-title">
+          <span class="slide-title-num">2.</span> Bảng phân công kèm cặp (Mentor — Mentee)
+        </div>
+        <div class="slide-subtitle">Trách nhiệm bồi dưỡng 1-1 trong 6 tháng đầu để đạt chuẩn bổ nhiệm chức danh</div>
+      </div>
+
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th>Mentor (Người hướng dẫn)</th>
+            <th>Mentee (Người được bồi dưỡng)</th>
+            <th>Mục tiêu bồi dưỡng &amp; Chuyển giao</th>
+            <th>Kết quả đầu ra tháng thứ 6</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Bùi Thanh Hải (Senior 1)</td>
+            <td>Nguyễn Quảng An, Phạm Tuấn Bình</td>
+            <td>Chuẩn hóa phương pháp giảng dạy lý thuyết bản chất, kỹ năng dẫn dắt thảo luận và phản biện</td>
+            <td style="color: #B71C1C;">Đạt chuẩn bổ nhiệm chính thức Senior 1</td>
+          </tr>
+          <tr>
+            <td>Trịnh Quốc Hai (Senior 1)</td>
+            <td>Lương Quốc Tuấn, Nguyễn Công Hưởng</td>
+            <td>Kỹ năng thiết kế case study, hướng dẫn đồ án tích hợp sâu; kỹ năng review code dự án</td>
+            <td style="color: #B71C1C;">Tuấn đạt Senior 1; Hưởng đạt Junior 3</td>
+          </tr>
+          <tr>
+            <td>Hồ Xuân Hùng (Trưởng phòng)</td>
+            <td>Lâm Tùng Dương</td>
+            <td>Kỹ năng điều phối lớp học, xử lý kiến trúc hệ thống đồ án và phương pháp đánh giá sinh viên</td>
+            <td style="color: #B71C1C;">Dương đạt chuẩn Giảng viên Junior 3</td>
+          </tr>
+          <tr>
+            <td>Nguyễn Quảng An, Phạm Tuấn Bình</td>
+            <td>Phạm Ngọc Kiên, Lại Trung Lâm</td>
+            <td>Kỹ năng live coding mạch lạc, nói và gõ đồng thời, phương pháp hướng dẫn thực hành cơ bản</td>
+            <td style="color: #B71C1C;">Kiên và Lâm đạt chuẩn Giảng viên Junior 2</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout-box">
+        <span class="callout-icon">💡</span>
+        <span>Chỉ số đánh giá: Hiệu quả hoàn thành của Mentor được gắn liền với kết quả thi dạy thử của Mentee vào tháng thứ 6.</span>
+      </div>
+    </div>
+
+    <div class="footer-bar">© 2026 By Rikkei Education - Rikkei Education - All rights reserved.</div>
+    <div class="slide-number-badge">21</div>
+  </div>
+
+  <!-- SLIDE 22: TỔNG KẾT -->
+  <div class="slide" id="slide-22">
+    <div class="slide-top-bar"></div>
+    <div class="logo-container">
+      <div>
+        <div class="logo-text">RIKKEI EDUCATION</div>
+        <div class="logo-sub">where the dream begins</div>
+      </div>
+    </div>
+
+    <div style="display: flex; height: 100%; padding: 40px 48px 45px 0;">
+      <div style="width: 130px; background: #B71C1C; display: flex; align-items: center; justify-content: center; color: #FFFFFF; font-size: 32px; font-weight: 600; writing-mode: vertical-rl; transform: rotate(180deg); letter-spacing: 4px;">
+        TỔNG KẾT
+      </div>
+      <div style="flex: 1; padding: 20px 48px; display: flex; flex-direction: column; justify-content: center; gap: 16px;">
+        <div style="display: flex; align-items: flex-start; gap: 14px; font-size: 15px; color: #37474F;">
+          <span style="color: #B71C1C; font-size: 18px;">❏</span>
+          <span><strong>Mô hình đào tạo chuẩn hóa:</strong> Kết hợp 3 trụ cột (LMS - Trên lớp - Rèn luyện chuyên sâu) với tỷ trọng trên lớp 30% Lý thuyết tương tác - 20% Thực hành cơ bản - 20% Thực hành tích hợp - 30% Project thực tế.</span>
+        </div>
+        <div style="display: flex; align-items: flex-start; gap: 14px; font-size: 15px; color: #37474F;">
+          <span style="color: #B71C1C; font-size: 18px;">❏</span>
+          <span><strong>Khung 6 cấp bậc nhân sự kế thừa:</strong> Cấp bậc cao hơn làm được toàn bộ công việc cấp dưới. Toàn bộ 10 nhân sự trong phòng đều có khả năng hỗ trợ công việc trợ giảng LMS.</span>
+        </div>
+        <div style="display: flex; align-items: flex-start; gap: 14px; font-size: 15px; color: #37474F;">
+          <span style="color: #B71C1C; font-size: 18px;">❏</span>
+          <span><strong>Tối ưu hóa tải với AI Agent:</strong> Định mức 1 GV = 3 lớp, 1 Trợ giảng = 4 lớp. Quy mô 13 lớp (440 sinh viên) hoàn toàn vừa vặn với bộ khung 10 người hiện có.</span>
+        </div>
+        <div style="display: flex; align-items: flex-start; gap: 14px; font-size: 15px; color: #37474F;">
+          <span style="color: #B71C1C; font-size: 18px;">❏</span>
+          <span><strong>Chiến lược nhân sự rõ ràng:</strong> Đóng băng tuyển dụng mới 100%, tập trung phát triển nội bộ và sàng lọc hiệu suất theo KPI định mức 3 lớp.</span>
+        </div>
+        <div style="display: flex; align-items: flex-start; gap: 14px; font-size: 15px; color: #37474F;">
+          <span style="color: #B71C1C; font-size: 18px;">❏</span>
+          <span><strong>Lộ trình 6 - 12 tháng bài bản:</strong> 4 chặng chuyển giao rõ ràng, phân công Mentor - Mentee 1-1, đưa An - Bình - Tuấn lên Senior 1, Hưởng - Dương lên Junior 3, Kiên - Lâm lên Junior 2.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bar">© 2026 By Rikkei Education - Rikkei Education - All rights reserved.</div>
+    <div class="slide-number-badge">22</div>
+  </div>
+
+  <!-- SLIDE 23: KẾT THÚC -->
+  <div class="slide slide-break" id="slide-23">
+    <div class="break-bg-pattern"></div>
+    <div style="position: relative; z-index: 2; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
+      <div style="font-size: 48px; letter-spacing: 2px; font-weight: 600; margin-bottom: 16px;">KẾT THÚC</div>
+      <div style="font-size: 18px; letter-spacing: 1px; color: rgba(255,255,255,0.9); text-transform: uppercase;">
+        HỌC VIỆN ĐÀO TẠO LẬP TRÌNH CHẤT LƯỢNG NHẬT BẢN
+      </div>
+      <div style="margin-top: 40px; display: flex; align-items: center; gap: 10px;">
+        <span style="font-size: 24px; font-weight: 600;">RIKKEI EDUCATION</span>
+      </div>
+    </div>
+    <div class="footer-bar" style="color: rgba(255,255,255,0.7);">© 2026 By Rikkei Education - Rikkei Education - All rights reserved.</div>
+  </div>
+
+</div>
+
+<!-- NAVIGATION TOOLBAR -->
+<div id="nav-controls">
+  <button class="nav-btn" onclick="prevSlide()">◀ Trước</button>
+  <span id="slide-indicator">Slide 1 / 23</span>
+  <button class="nav-btn" onclick="nextSlide()">Sau ▶</button>
+  
+  <select id="slide-select" onchange="goToSlide(parseInt(this.value))">
+    <option value="1">1. Bìa chính</option>
+    <option value="2">2. Mục lục</option>
+    <option value="3">3. Section 1: Mô hình đào tạo CNTT</option>
+    <option value="4">4. Sơ đồ mô hình đào tạo CNTT</option>
+    <option value="5">5. Section 2: Tiêu chuẩn đánh giá nhân sự</option>
+    <option value="6">6. Tổng quan: Khung rank nhóm chuyên môn</option>
+    <option value="7">7. Tiêu chuẩn Junior 1 &amp; Junior 2</option>
+    <option value="8">8. Tiêu chuẩn Junior 3 &amp; Senior 1</option>
+    <option value="9">9. Tiêu chuẩn Senior 2 &amp; Senior 3</option>
+    <option value="10">10. Xếp loại 10 nhân sự hiện tại</option>
+    <option value="11">11. Section 3: Nhu cầu nhân sự &amp; Quyết định</option>
+    <option value="12">12. Bài toán tải nhân sự &amp; AI Agent</option>
+    <option value="13">13. Bảng cân đối Chuẩn vs Thực tế</option>
+    <option value="14">14. Quyết định chiến lược (Tuyển dụng - Phát triển - Tinh giảm)</option>
+    <option value="15">15. Section 4: Lộ trình phát triển nhân sự</option>
+    <option value="16">16. Lưu đồ: Junior 1 -> Junior 2</option>
+    <option value="17">17. Lưu đồ: Junior 2 -> Junior 3</option>
+    <option value="18">18. Lưu đồ: Junior 3 -> Senior 1</option>
+    <option value="19">19. Lưu đồ: Senior 1 -> Senior 2</option>
+    <option value="20">20. Section 5: Kế hoạch phát triển 6 - 12 tháng</option>
+    <option value="21">21. Kế hoạch triển khai 2 giai đoạn</option>
+    <option value="22">22. Bảng phân công Mentor - Mentee</option>
+    <option value="23">23. Tổng kết bài toán</option>
+    <option value="24">24. Kết thúc</option>
+  </select>
+
+  <button class="nav-btn" onclick="toggleFullScreen()">⛶ Toàn màn hình</button>
+  <button class="nav-btn" onclick="window.print()">🖨 In / Lưu PDF</button>
+</div>
+
+<script>
+  let currentSlide = 1;
+  const totalSlides = 24;
+
+  function showSlide(index) {
+    if (index < 1) index = 1;
+    if (index > totalSlides) index = totalSlides;
+    currentSlide = index;
+
+    document.querySelectorAll('.slide').forEach((slide, idx) => {
+      slide.classList.toggle('active', (idx + 1) === currentSlide);
+    });
+
+    document.getElementById('slide-indicator').textContent = 'Slide ' + currentSlide + ' / ' + totalSlides;
+    document.getElementById('slide-select').value = currentSlide;
+  }
+
+  function nextSlide() {
+    if (currentSlide < totalSlides) {
+      showSlide(currentSlide + 1);
+    }
+  }
+
+  function prevSlide() {
+    if (currentSlide > 1) {
+      showSlide(currentSlide - 1);
+    }
+  }
+
+  function goToSlide(n) {
+    showSlide(n);
+  }
+
+  function toggleFullScreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(err => {});
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+    }
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+      nextSlide();
+    } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      prevSlide();
+    } else if (e.key === 'Home') {
+      showSlide(1);
+    } else if (e.key === 'End') {
+      showSlide(totalSlides);
+    }
+  });
+
+  // Responsive scale to fit 16:9 box nicely
+  function fitSlides() {
+    const container = document.getElementById('presentation-container');
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    const scale = Math.min((w - 20) / 1280, (h - 60) / 720);
+    document.querySelectorAll('.slide').forEach(slide => {
+      slide.style.transform = 'scale(' + scale + ')';
+      slide.style.transformOrigin = 'center center';
+    });
+  }
+
+  window.addEventListener('resize', fitSlides);
+  fitSlides();
+</script>
+
+</body>
+</html>
